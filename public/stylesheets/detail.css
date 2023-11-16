@@ -1,0 +1,330 @@
+.product-container{
+    padding: 0px 40px;
+    padding-bottom: 50px;
+}
+.product-wrapper{
+    width: 100%;
+    display: flex;
+    padding: 0px 80px;
+}
+
+
+.product-wrapper-left{
+    flex-basis: 65%;
+    
+}
+#detail-information >h4{
+    font-weight: 500;
+}
+.detail-price{
+    padding-top: 20px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.detail-cardPrice{
+    text-decoration: line-through;
+    color: #7b7b7b;
+    padding-right: 10px;
+}
+.product-listImage{
+    display: flex;
+    position: sticky;
+    left: 0;
+}
+.product-imageSmall div{
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.product-color{
+    background: #F6F6F6;
+}
+.product-color >img{
+    border-radius: 5px;
+}
+.product-imageSmall div:hover{
+    background-color: #CCCCCC;
+}
+.product-imageSmall-bgr{
+    background-color: #CCCCCC;
+}
+.product-imageBig{
+    padding-left: 20px;
+}
+.product-imageBig img{
+    border-radius: 10px;
+    background-size: cover;
+}
+.product-wrapper-right{
+    flex-basis: 35%;
+    /* tạo thanh cuộn */
+    width: 370px;
+    height: 600px;
+    overflow-y:auto;
+    scrollbar-width: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+/* ẩn thanh cuộn */
+.product-wrapper-right::-webkit-scrollbar{
+    width: 0 !important;
+    display: none;
+}
+
+.product-listSmall{
+    padding: 20px 0px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-gap: 10px;
+}
+.product-listSmall img{
+    border-radius: 5px;
+}
+.product-listSmall img:hover{
+    border: 1px solid rgb(11, 11, 11);
+}
+.product-textSize{
+    text-align:right;
+    font-weight: 500;
+}
+.product-boxSize{
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    text-align: center;
+    padding: 12px 0px;
+}
+.product-boxSize:hover{
+    border: 1px solid rgb(11, 11, 11);
+}
+
+.product-selectSize{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+}
+.detail-size{
+    width:auto;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+
+}
+.product-textSize a{
+    color: rgb(101, 101, 101);
+    text-decoration: none;
+}
+.productByNow{
+    /* background-color: rgb(11, 11, 11); */
+    border: 1px solid #CCCCCC;
+    border-radius: 50px;
+    color: rgb(11, 11, 11);
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 20px;
+    margin: 15px 0px;
+}
+.productByNow:hover{
+    /* background-color: #CCCCCC; */
+    background-color: rgb(11, 11, 11);
+    color: rgb(255, 255, 255);
+}
+.productAddToBag{
+    border: 1px solid #CCCCCC;
+    border-radius: 50px;
+    color: rgb(11, 11, 11);
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+.productAddToBag:hover{
+    /* border: 1px solid rgb(11, 11, 11); */
+    background-color: rgb(11, 11, 11);
+    color: rgb(255, 255, 255);
+}
+.product-textInfomation{
+    line-height: 2;
+}
+.product-liInfomaton ul{
+    line-height: 2;
+    padding-left: 17px;
+}
+.product-vpd {
+    padding-bottom: 30px;
+}
+.product-vpd a{
+    color: rgb(11, 11, 11);
+}
+/* /////////////SIZE & FIT  */
+.product-sizeFit-show{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    padding-top: 26px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.product-sizeFit-hide{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #CCCCCC;
+    padding-top: 26px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.product-sizeFit-hide i{
+    transform: rotate(-180deg);
+    margin-bottom: 15px;
+}
+.product-sizeFit-ul ul{
+    padding-left: 17px;
+    border-bottom: 1px solid #CCCCCC;
+    padding-bottom: 30px;
+    margin: 0px;
+}
+.product-sizeFit-ul li{
+    line-height: 2;
+}
+.product-sizeFit-ul a{
+    text-decoration: none;
+    color: rgb(11, 11, 11);
+    font-weight: 500;
+}
+.product-hide{
+    display: none;
+}
+.product-sizeFitHide{
+    display: none;
+}
+/* ////////////////Free Delivery and Returns  */
+.product-free-show{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #CCCCCC;
+    padding-top: 26px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.product-free-hide{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #CCCCCC;
+    padding-top: 26px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.product-free-ul ul{
+    padding-left: 17px;
+}
+.product-free-hide i{
+    transform: rotate(-180deg);
+    margin-bottom: 15px;
+}
+.product-freeHide{
+    display: none;
+}
+/*                REVIEWS  */
+        /* show  */
+.product-reviews-show{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #CCCCCC;
+    padding-top: 26px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+        /* hide  */
+.productReviews-hide{
+    display: none;
+}
+.product-reviewshide{
+    border-bottom: 1px solid #CCCCCC;
+    padding-bottom: 60px;
+}
+.product-reviews-hide{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 26px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.product-reviewshide .product-comment{
+    padding: 20px 0px;
+}
+.product-reviewshide .product-comment i{
+    font-size: 12px;
+}
+.product-reviewshide .product-comment span{
+    padding: 0px 20px;
+    line-height: 3;
+    color: #7d7d7d;
+}
+.product-reviewshide div a{
+    color:rgb(11, 11, 11) ;
+    text-decoration: none;
+}
+            /* END REVIEWS  */
+.product-midText{
+    font-size: 20px;
+    padding-top: 60px;
+    padding-bottom: 10px;
+}
+/*//////////// SHOES SHOW  */
+.product-show-wrapper{
+    position: relative;
+    overflow: hidden;
+}
+#product-show-slide{
+    width: max-content;
+}
+#product-show-slide .item{
+    width: 370px;
+    height: 370px;
+    /* background-position: 50% 50%; */
+    display: inline-block;
+    transition: 1s;
+    background-size: cover;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+.product-show-buttons #next{
+    left: 94%;
+}
+.product-show-buttons #prev{
+    left: 30px;
+}
+.product-show-buttons button{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid rgb(245, 245, 245);
+    transition: 1s;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.product-show-buttons button:hover{
+    background-color: rgb(200, 200, 200);
+}
+/* /////////////END SHOES SHOW  */
+
+/* //////////clast List Add  */
+.product-classList-size{
+    cursor: not-allowed !important;
+    opacity: 0.5;
+}
+.product-classList-border{
+    border: 1px solid rgb(11, 11, 11);
+}

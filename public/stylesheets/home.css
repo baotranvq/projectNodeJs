@@ -1,0 +1,234 @@
+/* slideshowpgae */
+
+/* main-content */
+.main-content1 {
+    padding-bottom: 30px;
+}
+.main-content {
+    padding: 0px 40px;
+    /* align-items: center; */
+}
+.main-img > a > img {
+    width: 100%;
+    margin-top: -66px;
+}
+/*  */
+.main-textfirst {
+    text-align: center;
+    padding: 30px 0px;
+}
+.main-textfirst a:hover {
+    color: black;
+    text-decoration: none;
+}
+.main-textfirst a {
+    font-weight: 900;
+    color: black;
+    text-decoration: none;
+    font-size: 50px;
+}
+.main-shoplook {
+    text-align: center;
+}
+.main-shoplook input {
+    border: none;
+    padding: 7px 13px;
+    color: white;
+    background-color: black;
+    border-radius: 30px;
+}
+.main-shoplook input:hover {
+    opacity: 50%;
+}
+.main-textlong {
+    text-align: center;
+}
+.main-textlong a{
+    text-decoration: none;
+    color: black;
+}
+.main-textlong a:hover{
+    text-decoration: none;
+    color: black;
+}
+.main-img1 a img {
+    width: 100%;
+    height: 100%;
+}
+.main-trending {
+    display: flex;
+    justify-content: space-between;
+}
+.main-trending img{
+    width: 100%;
+}
+/* slide show shoe*/
+
+.page-wrapper{
+    position: relative;
+    overflow: hidden;
+}
+#page-slide{
+    width: max-content;
+}
+.page-item-shoes{
+    width: 350px;
+    height: 350px;
+    /* background-position: 50% 50%; */
+    display: inline-block;
+    transition: 1s;
+    background-size: cover;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+#page-next{
+    left: 94%;
+}
+#page-prev{
+    left: 30px;
+}
+.page-buttons button{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /* border: 1px solid rgb(88, 88, 88); */
+    border: none    ;
+    transition: 1s;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.page-buttons button:hover{
+    background-color: rgb(200, 200, 200);
+}
+
+/* main-essential */
+.main-essential {
+    display: flex;
+    /* justify-content: space-around; */
+}
+.main-essential img {
+    width: 100%;
+    position: relative;
+}
+.main-btes input {
+    background-color: white;
+    color: black;
+}
+.main-btes {
+    position: absolute;
+    margin-top: -70px;
+    margin-left: 50px;
+}
+/* near-fooder */
+.near-fooder {
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 0px;
+}
+.near-fooder li{
+    padding: 10px 0px;
+    font-weight: 500;
+}
+.item{
+    width: 100%;
+    height: 450px;
+}
+.page-text-h4{
+    font-weight: 700;
+    font-size: 24px;
+}
+
+
+/* account */
+.user-hide {
+    display: none;
+}
+.user-us {
+    display: none;
+}
+
+/*  */
+
+.list-accountt {
+    position: absolute;
+    background-color: white;
+    display: none;
+    z-index: 1;
+    /* padding-top: 30px; */
+    padding-bottom: 10px;
+    right: 0;
+    padding-right: 100px;
+    margin-left: -50px;
+    border-radius: 10%;
+}
+.user-account > a {
+    position: relative;
+}
+.user-account:hover .list-accountt {
+    display: block;
+}
+.ls-account {
+    list-style: none;
+}
+.ls-account li{
+    padding: 5px 0px;
+}
+.ls-account li a{
+    color: black;
+    text-decoration: none;
+    opacity: 50%;
+}
+.ls-account li:first-child{
+    font-size: 17px;
+    padding: 20px 0px;
+}
+.ls-account li:first-child a{
+    opacity: 100%;
+}
+.ls-account li a:hover{
+    opacity: 100%;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width:769px){
+    .page-item-shoes{
+        width: 250px;
+        height: 250px;
+    }
+    .page-buttons button{
+        width: 30px;
+        height: 30px;
+        font-size: unset;
+    }
+    #page-prev{
+        left: 0;
+    }
+    #page-next{
+        left: 87%;
+    }
+    .main-textfirst a{
+        font-size: 20px;
+    }
+    .page-text-h4{
+        font-size: 20px;
+    }
+    .main-essential{
+        display: unset;
+    }
+    .near-fooder ul{
+        padding-left: 0px;
+        padding-right: 10px;
+    }
+    .near-fooder ul a{
+        font-size: 14px;
+    }
+    .main-content{
+        padding: 0px 10px;
+    }
+    .item{
+        width: 100%;
+        height: auto;
+    }
+}

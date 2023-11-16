@@ -1,0 +1,202 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <!-- HEADER SHOW -->
+    <div > 
+        <div id="carouselExampleDark" class="carousel carousel-dark slide"  data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <% var index = 1 %>
+                <% for (let banner of slides) { %>
+                    <% if( index == 1){ %>
+                        <% index ++ %>
+                        <div class="carousel-item active" data-bs-interval="3000">
+                            <img src="images/slideShow/<%= banner.image %>" class="d-block w-100" alt="...">
+                        </div>
+                    <% }else{ %>
+                        <div class="carousel-item" data-bs-interval="3000">
+                            <img src="images/slideShow/<%= banner.image %>" class="d-block w-100" alt="...">
+                        </div>
+                <% }}%>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+      </div>
+    <!-- PAGE -->
+    <div class="main-content">
+        <div class="main-content1">
+            <!-- <div class="main-img">
+                <a href=""><img src="img/img-au/nike-just-do-it (1).jpg" alt=""></a>
+            </div> -->
+            <div class="container containerr">
+            </div>
+            <div class="main-textfirst">
+                <a href="">NEVER BEFORE. <br> FOREVER AFTER <br></a>
+
+            </div>
+            <div class="main-textlong">
+                <p><a href="">Match day or any day, show up for your team in style
+                        with the 2023 Nike National Team Collections.</a></p>
+            </div>
+            <div class="main-shoplook">
+                <input type="button" value="Shop the Looks">
+            </div>
+        </div>
+        <div class="main-content1">
+            <div style="padding: 20px 0px;">
+                <h4 class="page-text-h4">The Latest</h4>
+            </div>
+            <div class="main-img1">
+                <a href=""><img src="images/homePage/3.webp" alt=""></a>
+            </div>
+            <div class="main-textfirst">
+                <a href="">DUNKS AND JORDANS<br>
+
+            </div>
+            <div class="main-textlong">
+                <p><a href="">
+                        Don't miss your chance to score coveted restocks and new editions of your favourite kicks,<br>
+                        with colour-themed drops happening daily-only on the Nike App</a></p>
+            </div>
+            <div class="main-shoplook">
+                <input type="button" value="Download the Nike App">
+            </div>
+        </div>
+        <div class="main-content1">
+            <div style="padding: 20px 0px;">
+                <h4 class="page-text-h4">Trending</h4>
+            </div>
+            <div class="main-trending">
+                <div>
+                    <a href=""><img src="images/homePage/image.png" alt=""></a>
+                </div>
+                <div>
+                    <a href=""><img src="images/homePage/image1.jpg" alt=""></a>
+                </div>
+            </div>
+
+        </div>
+        <div class="main-content1">
+            <div style="padding: 20px 0px;">
+                <h4 class="page-text-h4">Don't Miss</h4>
+            </div>
+            <div class="main-img1">
+                <a href=""><img src="images/homePage/nike-just-do-it.jpg" alt=""></a>
+            </div>
+            <div class="main-textfirst">
+                <a href="">LIVERPOOL FC<br>2023/24 AWAY  </a>
+
+            </div>
+            <div class="main-textlong">
+                <p><a href="">
+                        Go green for the return of a classic.</a></p>
+            </div>
+            <div class="main-shoplook">
+                <a href="/listProduct.html?"><input type="button" value="Shop"></a>
+            </div>
+        </div>
+        <div class="page-wrapper">
+            <div id="page-slide">
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike1.webp);">
+                </div>
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike2.webp);">
+                </div>
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike3.webp);">
+                </div>
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike4.webp);">
+                </div>
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike5.webp);">
+                </div>
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike6.webp);">
+                </div>
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike7.webp);">
+                </div>
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike8.webp);">
+                </div>
+                <div class="page-item-shoes" style="background-image: url(images/shoeSlide/nike9.webp);">
+                </div>
+            </div>
+            <div class="page-buttons">
+                <button id="page-prev"><i class="bi bi-chevron-left"></i></button>
+                <button id="page-next"><i class="bi bi-chevron-right"></i></button>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h4 class="page-text-h4">The Essentials</h4>
+            </div>
+            <div class="main-essential">
+                <div>
+                    <a href=""><img  src="images/homePage/men.png" alt=""></a>
+                    <div class="main-shoplook main-btes">
+                        <input type="button" value="Men's">
+                    </div>
+                </div>
+                
+                <div>
+                    <a href=""><img src="images/homePage/women.png" alt=""></a>
+                    <div class="main-shoplook main-btes">
+                        <input type="button" value="Women's">
+                    </div>
+                </div>
+                <div>
+                    <a href=""><img  src="images/homePage/kid.png" alt=""></a>
+                    <div class="main-shoplook main-btes">
+                        <input type="button" value="Kid's">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="near-fooder">
+            <ul class="sub-menu">
+                <li><a href="">Icon</a></li>
+                <li><a href="">Air Force 1</a></li>
+                <li><a href="">Huarache</a></li>
+                <li><a href="">Air Max 90</a></li>
+                <li><a href="">Air Max 95</a></li>
+            </ul>
+            <ul class="sub-menu">
+                <li><a href="">Shoe</a></li>
+                <li><a href="">All Shoes</a></li>
+                <li><a href="">Custom Shoes</a></li>
+                <li><a href="">Jordan Shoes</a></li>
+                <li><a href="">Running Shoes</a></li>
+            </ul>
+            <ul class="sub-menu">
+                <li><a href="">Clothing</a></li>
+                <li><a href="">All Clothing</a></li>
+                <li><a href="">Modest Wear</a></li>
+                <li><a href="">Hoodies & Pullovers</a></li>
+                <li><a href="">Shirts & Tops</a></li>
+            </ul>
+            <ul class="sub-menu">
+                <li><a href="">Kids'</a></li>
+                <li><a href="">Infant & Toddler Shoes</a></li>
+                <li><a href="">Kids' Shoes</a></li>
+                <li><a href="">Kids' Jordan Shoes</a></li>
+                <li><a href="">Kids' Basetball Shoes</a></li>
+            </ul>
+        </div>
+    </div>
+    <script src="../../.././javascripts/home.js"></script>
+</body>
+
+
+

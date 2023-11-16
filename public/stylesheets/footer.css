@@ -1,0 +1,131 @@
+/* Footer */
+
+.footer-all{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(8, 8, 8);
+    padding-top: 20px;
+}
+.footer-links{
+    display: flex;
+    
+}
+.footer-links a{
+    text-decoration: none;
+    color: white;
+}
+.footer-links li{
+    list-style: none;
+}
+
+.footer-menu1 li{
+    padding: 10px 0px ;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.footer-menu2{
+    padding: 0px 70px;
+}
+.footer-menu2 li{
+    padding: 10px 0px ;
+}
+.footer-menu3 li{
+    padding: 10px 0px ;
+}
+#footer-text2{
+    font-size: 12px;
+    color: rgb(171, 171, 167) ;
+}
+#footer-text3{
+    font-size: 12px;
+    color: rgb(171, 171, 167) ;
+}
+
+.footer-icons{
+    display: flex;
+    list-style: none;
+    padding-right: 20px;
+}
+.footer-icons a{
+    padding: 0px 10px;
+    color: white;
+}
+
+
+.footer-bottom {
+    display: flex;
+    background-color: rgb(8, 8, 8);
+    justify-content: space-between; 
+    align-items: center; 
+    font-size: 12px;
+}
+
+.footer-location{
+    display: flex   ;
+    justify-items: center;
+    padding-left: 50px;
+}
+.footer-location i{
+    padding-right: 10px;
+}
+.location-text{
+    color: rgb(171, 171, 167);
+    padding-left: 30px;
+}
+.footer-list {
+    display: flex;
+    
+
+}
+.footer-list li{
+    list-style: none;
+    padding: 0px 20px;
+    
+}
+.footer-list a{
+    text-decoration: none;
+    color: rgb(171, 171, 167);
+}
+
+.footer-menu2 .bi, .footer-menu3 .bi{
+    display: none;
+}
+
+
+/* RESPONSIVE */
+@media screen and (max-width:768px) {
+    .footer-links{
+        display: unset;
+    }
+    .footer-links ul{
+        padding-left: 10px;
+    }
+    .footer-menu2{
+        padding: unset;
+    }
+    .footer-menu2 .bi, .footer-menu3 .bi{
+        display: block;
+        color: white;
+        padding-left: 40px;
+        padding-top: 10px;
+        
+    }
+    .footer-menu2 , .footer-menu3{
+        display: flex;
+    }
+    .footer-scan3{
+        display: none;
+    }
+    .footer-scan2{
+        display: none;
+    }
+    .footer-location{
+        padding-left: 10px;
+    }
+    .footer-list{
+        display: none;
+    }
+    
+
+}
