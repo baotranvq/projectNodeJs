@@ -1,0 +1,22 @@
+.sl-gender {
+    display: flex;
+}
+.gender-m {
+    opacity: 50%;
+}
+.gender-light {
+    opacity: 100%;
+}
+.inp-join {
+    padding: 5px 15px;
+    width: 400px;
+}
+
+.join-light {
+    border: 1px solid red;
+}
+.error-message{
+    padding-top: 10px;
+    color: red;
+}
+

@@ -11,7 +11,27 @@ class UsersController {
     };
     APIproductDetail = function (req, res) {
         let id = req.params.id;
-        modeProducts.read(id, function(data){
+        // const arr = [];
+        // // arr = [DV5141, 611];
+        // let string = '';
+
+        // for (let i = 0; i < id.length; i++) {
+        //     if(id[i] != '-'){
+        //         string +=id[i];
+        //     }
+        //     if(id[i] === '-'){
+        //         arr.push(string);
+        //         string = '';
+        //     }            
+        //     if(i === id.length - 1){
+        //         arr.push(string);
+        //     }
+        // }
+        const arr = id.split('-')
+        let id_code = arr[0];
+        // console.log("ID: ",id);
+        // console.log("arr:",arr)
+        modeProducts.read(id_code, function(data){
             res.json(data);
         })
     };

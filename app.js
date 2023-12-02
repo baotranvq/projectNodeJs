@@ -4,11 +4,26 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const ejsLayouts = require('express-ejs-layouts');
+var bodyParser = require('body-parser');
+const session = require('express-session');
+
 
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(session({
+  secret: 'keyboardcat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    secure: false,
+    maxAge: 10 * 60 *1000
+   }
+}))
+
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'resources/views'));

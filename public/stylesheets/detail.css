@@ -31,7 +31,7 @@
     position: sticky;
     left: 0;
 }
-.product-imageSmall div{
+.product-imageSmall >div>img{
     border-radius: 5px;
     margin-bottom: 10px;
 }
@@ -41,8 +41,8 @@
 .product-color >img{
     border-radius: 5px;
 }
-.product-imageSmall div:hover{
-    background-color: #CCCCCC;
+.product-imageSmall >div :hover{
+    border: 1px solid rgb(11, 11, 11);
 }
 .product-imageSmall-bgr{
     background-color: #CCCCCC;

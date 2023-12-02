@@ -1,0 +1,67 @@
+.main-login {
+    text-align: center;
+    /* padding: 30px 0px; */
+}
+.main-login1 {
+    display: flex;
+    justify-content: center;
+}
+.nike-unite-swoosh {
+    width: 400px;
+}
+.nike-unite-swoosh > img {
+    width: 50px;
+    padding: 15px 0px;
+}
+.view-header {
+    font-weight: 700;
+    font-size: 20px;
+}
+.nike-unite-swoosh > form {
+    padding: 20px 0px;
+}
+.nike-unite-swoosh > form > div {
+    padding: 5px 0px;
+    
+}
+.inp-login {
+    padding: 5px 15px;
+    width: 400px;
+}
+.inp-login-err {
+    border: 1px solid red;
+}
+.forgot-pass a {
+    color: rgb(169, 169, 169);
+    text-decoration: none;
+    font-size: 14px;
+}
+.forgot-pass a:hover {
+    color: rgb(169, 169, 169);
+}
+.how-pass {
+    color: rgb(169, 169, 169);
+}
+.how-use {
+    font-size: 14px;
+    
+}
+.how-use a{
+    color: rgb(169, 169, 169);
+}
+.how-use a:hover{
+    color: rgb(169, 169, 169);
+}
+.sign-in {
+    background-color: black;
+    color: white;
+    width: 400px;
+    border: none;
+    padding: 5px 15px;
+}
+.join-us {
+    color: black;
+}
+.join-us:hover {
+    color: black;
+}

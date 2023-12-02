@@ -1,0 +1,44 @@
+ <!-- LOGIN -->
+ <div class="main-login">
+    <div class="main-login1">
+        <div class="nike-unite-swoosh">
+            <img src="../../../images/download.png" alt="">
+            <div class="view-header">YOUR ACCOUNT FOR <br> EVERYTHING NIKE</div>
+            <% if (error) { %>
+                <div class="error-message">
+                    <%= error %>
+                </div>
+            <% } %>
+            <form action="/auth/postLogin" method="POST">
+                <p id="join-incorrectly" style="margin-bottom: 0px; text-align: left; font-size: 13px; color: red;"></p>
+                <div>
+                    <input class="inp-login" name="email" id="login-email" type="text" placeholder="Email address">
+                </div>
+                <p id="err-email" style="text-align: left; font-size: 13px; color: red;"></p>
+                <div>
+                    <input class="inp-login" name="password" id="login-password" type="password" placeholder="Password">
+                </div>
+                <p id="err-password" style="text-align: left; font-size: 13px; color: red;"></p>
+
+                <div style="display: flex; justify-content: space-between; padding: 5px 0px;">
+                    <div class="how-pass">
+                        <label class="container">
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            Keep me signed in
+                        </label>
+                    </div>
+                    <div class="forgot-pass">
+                        <a href="">Forgotten your password?</a>
+                    </div>
+                </div>
+                <p style="color: rgb(169, 169, 169); padding: 15px 0px;" class="how-use">By logging in, you agree to Nike's <span><a href="">Privacy Policy</a></span> and <br> <span><a href="">Terms of Use.</a></span></p>
+                <button id="sign-in-all" style="margin: 5px 0px;" class="sign-in" type="submit">SIGN IN</button>
+                <p style="color: rgb(169, 169, 169); padding: 15px 0px;">Not a Member? <span><a class="join-us" href="join.html">Join Us.</a></span></p>
+            </form>
+            
+        </div>
+    </div>
+   
+</div>
+<!-- END LOGIN  -->

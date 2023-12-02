@@ -1,3 +1,8 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+</head>
 
 <div class="listProduct-wrapper">
 
@@ -223,7 +228,7 @@
                 Categories = `${element.categories_name}`
                 typeShoe = `${element.type}`
                 result.innerHTML += `
-                    <a href="./detail/${element.code}">
+                    <a href="./detail/${element.code}-${element.color_name}">
                     <div type="button" class="cardItem">
                         <div class="product-img-wrapper">
                         <img class="" src="../../.././images/products/${element.big_image_1}" alt="card image" >

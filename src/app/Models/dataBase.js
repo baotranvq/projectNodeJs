@@ -11,6 +11,6 @@ db.connect(function(err) {
       console.error('error connecting: ' );
       return;
     }
-    console.log('connected ');
+    console.log('Successfully to connected ');
 });
 module.exports = db;
