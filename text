@@ -1,0 +1,94 @@
+// Hàm xử lý sự kiện khi nhấp vào thẻ a
+            function handleLinkClick(event) {
+                event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ a (tải lại trang)
+                // Lấy href từ thẻ a
+                var href = event.currentTarget.getAttribute('href');
+                // Thay đổi URL mà không tải lại trang
+                window.history.pushState({}, '', href);
+                data.forEach(product => {
+
+                    // In ra các màu giày 
+                    var colorName = product.color_name
+                    let result1 = $('.product-listSmall')
+
+                    if (!uniqueColorNames[colorName]) { // Kiểm tra xem color_name đã xuất hiện chưa
+                        if (count == 0) {
+                            result1.innerHTML = `
+                            <a href="http://localhost:3000/products/detail/DV5141-${product.color_name}" onclick="handleLinkClick(event)">
+                                <img class="tab-item border-img" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
+                            </a> `
+                            count = 1;
+                        } else {
+                            result1.innerHTML += `
+                            <a  href="http://localhost:3000/products/detail/DV5141-${product.color_name}" onclick="handleLinkClick(event)">
+                            <img class="tab-item" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
+                            </a> `
+                        }
+
+                        uniqueColorNames[colorName] = true; // Đánh dấu color_name đã xuất hiện
+                    }
+                    // End in các mau giày 
+
+
+
+
+                    // In ra các Size giyaf theo màu 
+
+                    let result2 = document.getElementById('product-selectSize')
+                    if (product.color_name === colorSize) {
+                        if (product.quantity === 0) {
+                            result2.innerHTML += `
+                            <div  type="button" class="detail-size product-boxSize product-classList-size">${product.size_name}</div>  `
+                        } else {
+                            result2.innerHTML += `
+                            <div type="button" class="detail-size product-boxSize">${product.size_name}</div>  `
+                        }
+                    }
+
+                    // End in ra các Size giày 
+
+
+                    // In ra thông tin shoes 
+
+                    if (product.color_name === colorSize && !uniqueColor[colorName]) {
+                        $('.product-textInfomation').innerHTML = ` <p>${product.description}</p> `
+                        document.getElementById('detail-information').innerHTML = `
+                            <h4>${product.product_name}</h4>
+                            <span style="font-size: 16px">${product.type} Shoes</span><br>
+                            <div class="detail-price">
+                                ${product.promotion_price > 0 ? `<span class="detail-cardPrice">${product.price.toLocaleString('vi-VN')} đ </span>` : `<span>${product.price.toLocaleString('vi-VN')} đ </span>`}        
+                                ${product.promotion_price > 0 ? `<span>${product.promotion_price.toLocaleString('vi-VN')} đ </span>` : ''} 
+                            </div>  `
+                        let result = document.getElementById('detail-product')
+                        result.innerHTML = `
+                            <div class="product-listImage">
+                                    <div class="product-imageSmall">
+                                        <div class="detail-img-thumbnail " id="product-image-1" type="button">
+                                            <img onmouseover="hoverImg('../../.././images/products/${product.big_image_1}')" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px">
+                                        </div>
+                                        <div class="detail-img-thumbnail" id="product-image-2" type="botton">
+                                            <img onmouseover="hoverImg('../../.././images/products/${product.big_image_2}')" src="../../.././images/products/${product.thumbnail_2}" alt="" width="80px">
+                                        </div>
+                                        <div class="detail-img-thumbnail" id="product-image-3" type="botton">
+                                            <img onmouseover="hoverImg('../../.././images/products/${product.big_image_3}')" src="../../.././images/products/${product.thumbnail_3}" alt="" width="80px">
+                                        </div>
+                                        <div class="detail-img-thumbnail" id="product-image-4" type="botton">
+                                            <img onmouseover="hoverImg('../../.././images/products/${product.big_image_4}')" src="../../.././images/products/${product.thumbnail_4}" alt="" width="80px">
+                                        </div>
+                                    </div>
+                                
+                                    <div class="product-imageBig">
+                                        <img id="product-imageBig" src="../../.././images/products/${product.big_image_1}" alt="" width="530px" height="600px">
+                                    </div>
+                                </div> `
+                        uniqueColor[colorName] = true;
+                    }
+                    // End in ra thông tin shoes 
+
+
+
+                })
+
+                
+            }
+

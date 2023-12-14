@@ -7,6 +7,8 @@ const ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 const session = require('express-session');
 
+const middleware = require('./src/app/Middleware/auth.middleware');
+
 
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -19,7 +21,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { 
     secure: false,
-    maxAge: 10 * 60 *1000
+    // maxAge: 10 * 60 *1000
    }
 }))
 
@@ -35,6 +37,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// kiểm tra login xl header
+app.use(middleware.logged);
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);

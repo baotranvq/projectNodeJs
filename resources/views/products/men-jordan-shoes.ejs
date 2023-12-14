@@ -213,9 +213,51 @@
 </div>
 <!-- <script src="./javascripts/product.js"></script> -->
 <script>
+    // async function fetchData(){
+    //     try{
+    //         let response  = await fetch("http://localhost:3000/users/APIproducts")
+    //         let data =      response.json();
+    //         let result = document.getElementById('shoe');
+    //         let count = 0;
+    //         let Categories='';
+    //         let typeShoe='';
+    //         data.forEach(element => {
+    //             count ++;
+    //             Categories = `${element.categories_name}`
+    //             typeShoe = `${element.type}`
+    //             result.innerHTML += `
+    //                 <a href="./detail/${element.code}-${element.color_name}">
+    //                 <div type="button" class="cardItem">
+    //                     <div class="product-img-wrapper">
+    //                     <img class="" src="../../.././images/products/${element.big_image_1}" alt="card image" >
+    //                     </div> 
+    //                     <div class="card-body">
+    //                         <h5 class="card-name" >${element.product_name}</h5>
+    //                         <p class="card-type">${element.type} Shoes</p>
+    //                         <div class="product-view-price">
+    //                             ${ element.promotion_price >0 ? `<p class="card-price has-promotion">${element.price.toLocaleString('vi-VN')} đ </p>` : `<p class="card-price">${element.price.toLocaleString('vi-VN')} đ </p>`}        
+    //                             ${ element.promotion_price >0 ? `<p class="card-promotion-price">${element.promotion_price.toLocaleString('vi-VN')} đ </p>` : ''}                                
+    //                         </div>                         
+    //                     </div>  
+    //                 </div>
+    //                 </a>`
+    //         });
+    //         document.getElementById('listProduct-jondan').innerHTML= typeShoe +' '+ Categories+" Shoes (" +count+ ")";
+    //         document.getElementById('product-title').innerHTML=Categories+" / Shoes ";
+    //     }
+    //     catch(error){
+    //         console.error("Error:", error);
+    //     }
+        
+
+    // }
+
+    // fetchData()
+
     fetch('http://localhost:3000/users/APIproducts')
         .then(function (res) {
             // console.log(res);
+            // console.log(res.json())
             return res.json();
         })
         .then(function (data) {

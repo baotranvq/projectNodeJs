@@ -6,10 +6,16 @@
         <ul >
             <li><a href="">Find a Store</a></li>
             <li><a href="">Help</a></li>
-            <li><a href="">Join Us</a></li>
-            <li><a style="border: none; padding-right: 0px;" href="">Sign In</a></li>
+            <% if (isAuthenticated) { %>        
+                <li><a id="header-first-user" href="">Hi,<%= username%> </a></li>
+                <i class="bi bi-person"></i>                       
+            <% } else { %>
+                <li><a href="">Join Us</a></li>
+                <li><a style="border: none; padding-right: 0px;" href="">Sign In</a></li>
+            <% } %>
         </ul>
     </div>
+    
     <div class="header-second">
         <nav class="header-navbar">
             <a class="header-logo-nike" href=""><img src="/images/header/download.png" alt=""></a>

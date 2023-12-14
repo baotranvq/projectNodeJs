@@ -76,6 +76,9 @@
     grid-template-columns: repeat(4, 1fr); 
     grid-gap: 10px;
 }
+.border-img{
+    border: 1px solid rgb(11, 11, 11) !important;
+}
 .product-listSmall img{
     border-radius: 5px;
 }
@@ -86,13 +89,8 @@
     text-align:right;
     font-weight: 500;
 }
-.product-boxSize{
-    border: 1px solid #CCCCCC;
-    border-radius: 5px;
-    text-align: center;
-    padding: 12px 0px;
-}
-.product-boxSize:hover{
+
+.detail-size:hover{
     border: 1px solid rgb(11, 11, 11);
 }
 

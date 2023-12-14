@@ -19,7 +19,9 @@
     display: flex;
     list-style: none;
     margin: auto 0px;
+    align-items: center;
 }
+
 .header-first > ul > li > a{
     padding: 0px 10px;
     border-right: 1px solid #aeaeae;
@@ -27,8 +29,16 @@
     color: black;
     font-size: 13px;
 }
+#header-first-user{
+    border-right: none;
+}
+
 .header-first > ul > li > a:hover{
     opacity: 50%;
+}
+
+.bi-person{
+    font-size: 26px;
 }
 /* header-second */
 .header-second {

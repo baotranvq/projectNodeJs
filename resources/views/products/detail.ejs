@@ -20,7 +20,11 @@
 
                 <!-- Render select size tu API  -->
             </div>
-            <div class="productByNow" type="button">By Now</div>
+            <div>
+                <!-- Lấy dữ liệu đến cart   -->
+
+            </div>
+            <div class="productByNow" type="button">Buy Now</div>
             <div class="productAddToBag" id="bag" type="button">Add to Bag</div>
             <div class="product-textInfomation">
                 <!-- Render description tu API  -->
@@ -190,6 +194,8 @@
     <!-- end SHOES SHOW  -->
 </div>
 <script>
+    
+
     $ = document.querySelector.bind(document)
     $$ = document.querySelectorAll.bind(document)
 
@@ -212,6 +218,8 @@
     let colorSize = getUrl()
     // END 
 
+    let getColor = null;
+
     fetch('/users/APIproductsDetail<%=id%>')
         .then(function (res) {
             if (!res.ok) { throw new Error("Error:" + res.status) }
@@ -221,82 +229,118 @@
 
             var uniqueColorNames = {}; // Đối tượng để lưu trữ các color_name đã xuất hiện
             var uniqueColor = {}; // Đối tượng để lưu trữ các color_name đã xuất hiện
+            let count = 0;
 
             data.forEach(product => {
 
                 // In ra các màu giày 
                 var colorName = product.color_name
                 let result1 = $('.product-listSmall')
+
                 if (!uniqueColorNames[colorName]) { // Kiểm tra xem color_name đã xuất hiện chưa
-                    result1.innerHTML += `
-                    <a href="http://localhost:3000/products/detail/DV5141-${product.color_name}">
-                        <img src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
-                    </a> `
+                    if (count == 0) {
+                        // href="http://localhost:3000/products/detail/DV5141-${product.color_name}"
+                        result1.innerHTML = `
+                        <a    onclick="selectColor(${product.color_id})">
+                        <img id ="detail-color-${product.color_id}" class="tab-item border-img" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
+                        </a> `
+                        count = 1;
+                        getColor = product.color_id;
+                    } else {
+                        // href="http://localhost:3000/products/detail/DV5141-${product.color_name}
+                        result1.innerHTML += `
+                        <a   " onclick="selectColor(${product.color_id})">
+                        <img id ="detail-color-${product.color_id}" class="tab-item" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
+                        </a> `
+                    }
+
                     uniqueColorNames[colorName] = true; // Đánh dấu color_name đã xuất hiện
                 }
                 // End in các mau giày 
 
 
+
+
                 // In ra các Size giyaf theo màu 
-                
+
                 let result2 = document.getElementById('product-selectSize')
                 if (product.color_name === colorSize) {
-                    if(product.quantity === 0){
+                    if (product.quantity === 0) {
                         result2.innerHTML += `
-                        <div  type="button" class="detail-size product-boxSize product-classList-size">${product.size_name}</div>  `
-                    }else{
+                        <div id="product-select-size-${product.size_id}" onclick="selectSize(${product.size_id})" type="button" class="detail-size  product-classList-size">${product.size_name}</div>  `
+                    } else {
                         result2.innerHTML += `
-                        <div type="button" class="detail-size product-boxSize">${product.size_name}</div>  `
-                        }
+                        <div id="product-select-size-${product.size_id}" onclick="selectSize(${product.size_id})" type="button" class="detail-size ">${product.size_name}</div>  `
                     }
-                    
+                }
+
                 // End in ra các Size giày 
 
 
                 // In ra thông tin shoes 
-                
-                if(product.color_name === colorSize && !uniqueColor[colorName]) {
-                $('.product-textInfomation').innerHTML = ` <p>${product.description}</p> `
-                document.getElementById('detail-information').innerHTML = `
-                <h4>${product.product_name}</h4>
-                <span style="font-size: 16px">${product.type} Shoes</span><br>
-                <div class="detail-price">
-                    ${product.promotion_price > 0 ? `<span class="detail-cardPrice">${product.price.toLocaleString('vi-VN')} đ </span>` : `<span>${product.price.toLocaleString('vi-VN')} đ </span>`}        
-                    ${product.promotion_price > 0 ? `<span>${product.promotion_price.toLocaleString('vi-VN')} đ </span>` : ''} 
-                </div>  `
+
+                if (product.color_name === colorSize && !uniqueColor[colorName]) {
+                    $('.product-textInfomation').innerHTML = ` <p>${product.description}</p> `
+                    document.getElementById('detail-information').innerHTML = `
+                    <h4>${product.product_name}</h4>
+                    <span style="font-size: 16px">${product.type} Shoes</span><br>
+                    <div class="detail-price">
+                        ${product.promotion_price > 0 ? `<span class="detail-cardPrice">${product.price.toLocaleString('vi-VN')} đ </span>` : `<span>${product.price.toLocaleString('vi-VN')} đ </span>`}        
+                        ${product.promotion_price > 0 ? `<span>${product.promotion_price.toLocaleString('vi-VN')} đ </span>` : ''} 
+                    </div>  `
                     let result = document.getElementById('detail-product')
                     result.innerHTML = `
-                <div class="product-listImage">
-                        <div class="product-imageSmall">
-                            <div class="detail-img-thumbnail " id="product-image-1" type="button">
-                                <img onmouseover="hoverImg('../../.././images/products/${product.big_image_1}')" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px">
+                    <div class="product-listImage">
+                            <div class="product-imageSmall">
+                                <div class="detail-img-thumbnail " id="product-image-1" type="button">
+                                    <img onmouseover="hoverImg('../../.././images/products/${product.big_image_1}')" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px">
+                                </div>
+                                <div class="detail-img-thumbnail" id="product-image-2" type="botton">
+                                    <img onmouseover="hoverImg('../../.././images/products/${product.big_image_2}')" src="../../.././images/products/${product.thumbnail_2}" alt="" width="80px">
+                                </div>
+                                <div class="detail-img-thumbnail" id="product-image-3" type="botton">
+                                    <img onmouseover="hoverImg('../../.././images/products/${product.big_image_3}')" src="../../.././images/products/${product.thumbnail_3}" alt="" width="80px">
+                                </div>
+                                <div class="detail-img-thumbnail" id="product-image-4" type="botton">
+                                    <img onmouseover="hoverImg('../../.././images/products/${product.big_image_4}')" src="../../.././images/products/${product.thumbnail_4}" alt="" width="80px">
+                                </div>
                             </div>
-                            <div class="detail-img-thumbnail" id="product-image-2" type="botton">
-                                <img onmouseover="hoverImg('../../.././images/products/${product.big_image_2}')" src="../../.././images/products/${product.thumbnail_2}" alt="" width="80px">
+                        
+                            <div class="product-imageBig">
+                                <img id="product-imageBig" src="../../.././images/products/${product.big_image_1}" alt="" width="530px" height="600px">
                             </div>
-                            <div class="detail-img-thumbnail" id="product-image-3" type="botton">
-                                <img onmouseover="hoverImg('../../.././images/products/${product.big_image_3}')" src="../../.././images/products/${product.thumbnail_3}" alt="" width="80px">
-                            </div>
-                            <div class="detail-img-thumbnail" id="product-image-4" type="botton">
-                                <img onmouseover="hoverImg('../../.././images/products/${product.big_image_4}')" src="../../.././images/products/${product.thumbnail_4}" alt="" width="80px">
-                            </div>
-                        </div>
-                    
-                        <div class="product-imageBig">
-                            <img id="product-imageBig" src="../../.././images/products/${product.big_image_1}" alt="" width="530px" height="600px">
-                        </div>
                     </div> `
-                uniqueColor[colorName] = true;
+                    uniqueColor[colorName] = true;
                 }
                 // End in ra thông tin shoes 
 
-
-
             })
-
-
+            
         })
         .catch(function (err) {
             console.log("Error: " + err)
         })
+
+ // XL chọn size
+    let selectSizeId = null;
+    function selectSize(sizeId){
+        selectSizeId = sizeId;
+        const classes = document.getElementsByClassName(`detail-size`);
+        for (let i = 0; i < classes.length; i++) {
+            classes[i].classList.remove('border-img');
+        }
+        document.getElementById(`product-select-size-${sizeId}`).classList.add("border-img");
+        console.log("Check sizeeeee",selectSizeId)
+    }
+
+ // XL chọn color shoe
+ function selectColor(colorId){
+        getColor = colorId;
+        const classes = document.getElementsByClassName(`tab-item`);
+        for (let i = 0; i < classes.length; i++) {
+            classes[i].classList.remove('border-img');
+        }
+        document.getElementById(`detail-color-${colorId}`).classList.add("border-img");
+        console.log("check Colorrrrrrrr",getColor )
+    }
 </script>

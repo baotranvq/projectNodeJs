@@ -6,11 +6,14 @@ class ProductController {
     };
     detail = function (req, res) {
         let id = req.params.id
-        // let color = req.params.color
+        let color = req.params.color
         res.render('products/detail',{ id: id});
     };
     product = function (req, res) {
         res.render('products/all-products');
+    };
+    cart = function (req, res) {
+        res.render('products/cart');
     };
 }
 
