@@ -16,6 +16,8 @@ class RegisterController {
         let lastname = req.body.lastname
         let birthday = req.body.birthday
         let gender = req.body.gender
+
+
         if (email && password && firstname && lastname && birthday && gender) {
             try{
                 let resultUser = await modelUser.findEmail(email);

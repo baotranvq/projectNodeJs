@@ -16,7 +16,6 @@ class LoginController {
         if (email && password) {
             try {
                 let resultUser = await modelUser.findEmail(email);
-                console.log(resultUser)
                 if (!resultUser) {
                     let notification = "Account does not exist";
                     return res.render('auth/login', { error: notification });

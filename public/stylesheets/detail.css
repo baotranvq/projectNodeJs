@@ -321,7 +321,7 @@
 /* //////////clast List Add  */
 .product-classList-size{
     cursor: not-allowed !important;
-    opacity: 0.5;
+    opacity: 0.3;
 }
 .product-classList-border{
     border: 1px solid rgb(11, 11, 11);

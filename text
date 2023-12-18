@@ -92,3 +92,36 @@
                 
             }
 
+///////////////
+Khi bạn muốn kết hợp việc lưu trữ dữ liệu giỏ hàng cả trong cơ sở dữ liệu và session, và muốn khôi phục giỏ hàng từ cơ sở dữ liệu khi người dùng đăng nhập lại, bạn cần thực hiện một số bước cụ thể. Dưới đây là cách bạn có thể thực hiện điều này:
+
+Bước 1: Khi Người Dùng Đăng Nhập
+Kiểm tra Đăng Nhập:
+
+Khi người dùng đăng nhập, kiểm tra xác thực và xác định người dùng đó (ví dụ: lấy thông tin người dùng từ cơ sở dữ liệu).
+Lưu thông tin người dùng vào session để duy trì phiên làm việc.
+Kiểm tra Giỏ Hàng Trong Session:
+
+Nếu có dữ liệu giỏ hàng trong session, hãy kiểm tra xem có cần phải đồng bộ dữ liệu với cơ sở dữ liệu hay không.
+Đồng Bộ Dữ Liệu:
+
+Nếu giỏ hàng trong session khác với dữ liệu trong cơ sở dữ liệu, hãy cập nhật cơ sở dữ liệu với thông tin giỏ hàng mới từ session.
+Bước 2: Khi Người Dùng Đăng Xuất
+Lưu Trữ Dữ Liệu Giỏ Hàng:
+
+Trước khi đăng xuất, lưu trữ thông tin giỏ hàng từ session vào cơ sở dữ liệu nếu có sự thay đổi.
+Xóa Session và Đăng Xuất:
+
+Xóa thông tin người dùng khỏi session.
+Đăng xuất người dùng.
+Bước 3: Khi Người Dùng Đăng Nhập Lại
+Kiểm tra Đăng Nhập:
+
+Khi người dùng đăng nhập lại, kiểm tra xác thực và xác định người dùng đó (ví dụ: lấy thông tin người dùng từ cơ sở dữ liệu).
+Lưu thông tin người dùng vào session để duy trì phiên làm việc.
+Lấy Dữ Liệu Giỏ Hàng Từ Cơ Sở Dữ Liệu:
+
+Lấy thông tin giỏ hàng từ cơ sở dữ liệu dựa trên thông tin người dùng đã đăng nhập.
+Cập Nhật Session:
+
+Cập nhật session với dữ liệu giỏ hàng mới từ cơ sở dữ liệu.

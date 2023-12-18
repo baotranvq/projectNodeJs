@@ -12,9 +12,7 @@ class ProductController {
     product = function (req, res) {
         res.render('products/all-products');
     };
-    cart = function (req, res) {
-        res.render('products/cart');
-    };
+    
 }
 
 module.exports = new ProductController();

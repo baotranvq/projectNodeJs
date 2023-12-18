@@ -21,13 +21,13 @@ app.use(session({
   saveUninitialized: true,
   cookie: { 
     secure: false,
-    // maxAge: 10 * 60 *1000
+    maxAge: 50 * 60 *1000
    }
 }))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// view engine setup
+// view engine setup // maxAge: 10 * 60 *1000
 app.set('views', path.join(__dirname, 'resources/views'));
 app.set('view engine', 'ejs');
 app.use(ejsLayouts); // Sử dụng express-ejs-layouts

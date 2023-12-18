@@ -20,12 +20,12 @@
 
                 <!-- Render select size tu API  -->
             </div>
-            <div>
-                <!-- Lấy dữ liệu đến cart   -->
-
-            </div>
+            
             <div class="productByNow" type="button">Buy Now</div>
-            <div class="productAddToBag" id="bag" type="button">Add to Bag</div>
+           
+            <div class="productAddToBag" id="detail-cart" >
+                <!-- Lấy dữ liệu đến cart  -->
+            </div>
             <div class="product-textInfomation">
                 <!-- Render description tu API  -->
             </div>
@@ -205,20 +205,21 @@
     }
     // end hover đổi ảnh 
 
+
     // function xử lý địa chỉ URL 
     function getUrl() {
         let url = window.location.href
         let arrUrl = url.split('/')
         let stringUrl = arrUrl[arrUrl.length - 1]
-
         let arrStrUrl = stringUrl.split('-')
         let resultUrl = arrStrUrl[arrStrUrl.length - 1]
         return resultUrl
     }
     let colorSize = getUrl()
     // END 
-
-    let getColor = null;
+    const urlController = new URL(window.location.href);// lấy url để controller xl
+    const path = urlController.pathname;
+    let selectSizeId = null;
 
     fetch('/users/APIproductsDetail<%=id%>')
         .then(function (res) {
@@ -234,22 +235,22 @@
             data.forEach(product => {
 
                 // In ra các màu giày 
-                var colorName = product.color_name
+                var colorName = product.color_id
                 let result1 = $('.product-listSmall')
 
                 if (!uniqueColorNames[colorName]) { // Kiểm tra xem color_name đã xuất hiện chưa
                     if (count == 0) {
-                        // href="http://localhost:3000/products/detail/DV5141-${product.color_name}"
+                        href="http://localhost:3000/products/detail/DV5141-${product.color_id}"
                         result1.innerHTML = `
-                        <a    onclick="selectColor(${product.color_id})">
+                        <a href="http://localhost:3000/products/detail/DV5141-${product.color_id}" >
                         <img id ="detail-color-${product.color_id}" class="tab-item border-img" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
                         </a> `
                         count = 1;
                         getColor = product.color_id;
                     } else {
-                        // href="http://localhost:3000/products/detail/DV5141-${product.color_name}
+                        //onclick="selectColor(${product.color_id})"
                         result1.innerHTML += `
-                        <a   " onclick="selectColor(${product.color_id})">
+                        <a href="http://localhost:3000/products/detail/DV5141-${product.color_id}">
                         <img id ="detail-color-${product.color_id}" class="tab-item" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
                         </a> `
                     }
@@ -264,7 +265,7 @@
                 // In ra các Size giyaf theo màu 
 
                 let result2 = document.getElementById('product-selectSize')
-                if (product.color_name === colorSize) {
+                if (product.color_id == colorSize) {
                     if (product.quantity === 0) {
                         result2.innerHTML += `
                         <div id="product-select-size-${product.size_id}" onclick="selectSize(${product.size_id})" type="button" class="detail-size  product-classList-size">${product.size_name}</div>  `
@@ -279,7 +280,17 @@
 
                 // In ra thông tin shoes 
 
-                if (product.color_name === colorSize && !uniqueColor[colorName]) {
+                if (product.color_id == colorSize && !uniqueColor[colorName]) {
+                    document.getElementById('detail-cart').innerHTML = `
+                        <form method="post" action="/cart/add-to-cart">
+                            <input type="hidden" name="productId" value="${product.product_id}">
+                            <input type="hidden" name="sizeId" id="sizeId">
+                            <input type="hidden" name="colorId" id="colorId" value="${colorSize}">
+                            <input type="hidden" name="previousUrl" value="${path}">
+                            <button  type="submit">Add to Cart</button>
+                        </form>
+                    `
+
                     $('.product-textInfomation').innerHTML = ` <p>${product.description}</p> `
                     document.getElementById('detail-information').innerHTML = `
                     <h4>${product.product_name}</h4>
@@ -322,7 +333,7 @@
         })
 
  // XL chọn size
-    let selectSizeId = null;
+    
     function selectSize(sizeId){
         selectSizeId = sizeId;
         const classes = document.getElementsByClassName(`detail-size`);
@@ -330,17 +341,19 @@
             classes[i].classList.remove('border-img');
         }
         document.getElementById(`product-select-size-${sizeId}`).classList.add("border-img");
+        document.getElementById('sizeId').value = selectSizeId;
         console.log("Check sizeeeee",selectSizeId)
     }
 
  // XL chọn color shoe
- function selectColor(colorId){
-        getColor = colorId;
-        const classes = document.getElementsByClassName(`tab-item`);
-        for (let i = 0; i < classes.length; i++) {
-            classes[i].classList.remove('border-img');
-        }
-        document.getElementById(`detail-color-${colorId}`).classList.add("border-img");
-        console.log("check Colorrrrrrrr",getColor )
-    }
+//  function selectColor(colorId){
+//         getColor = colorId;
+//         const classes = document.getElementsByClassName(`tab-item`);
+//         for (let i = 0; i < classes.length; i++) {
+//             classes[i].classList.remove('border-img');
+//         }
+//         document.getElementById(`detail-color-${colorId}`).classList.add("border-img");
+//         document.getElementById('colorId').value = getColor;
+//         console.log("check Colorrrrrrrr",getColor )
+//     }
 </script>
