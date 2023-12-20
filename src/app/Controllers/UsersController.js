@@ -1,4 +1,5 @@
 const modeProducts = require('../Models/product')
+const modeCarts = require('../Models/cart.model')
 
 class UsersController {
     users = function (req, res) {
@@ -35,5 +36,27 @@ class UsersController {
             res.json(data);
         })
     };
+
+    APIcart= function (req, res) {
+        let userInformation = req.session.user;
+        let userId = userInformation.id;
+        console.log("APIcart userID", userId);
+        modeCarts.readCart(userId,function(err,data){
+            if(err){
+                console.log("Lỗi truy vấn Carts SQL",err);
+            }
+            res.json(data);
+        })
+    };
+
+    deleteCart = function(req, res){
+        let id = req.params.id;
+        modeCarts.deleteCart(id,function(err,data){
+            if(err){
+                console.log("Lỗi truy vấn Delete Carts SQL",err);
+            }
+            res.json(data)
+        })
+    }
 }
 module.exports = new UsersController();

@@ -77,7 +77,7 @@
     grid-gap: 10px;
 }
 .border-img{
-    border: 1px solid rgb(11, 11, 11) !important;
+    border: 1.5px solid rgb(11, 11, 11) !important;
 }
 .product-listSmall img{
     border-radius: 5px;
@@ -113,8 +113,8 @@
     color: rgb(101, 101, 101);
     text-decoration: none;
 }
-.productByNow{
-    /* background-color: rgb(11, 11, 11); */
+/* .productByNow {
+    background-color: rgb(11, 11, 11);
     border: 1px solid #CCCCCC;
     border-radius: 50px;
     color: rgb(11, 11, 11);
@@ -123,13 +123,35 @@
     padding: 10px 0px;
     font-size: 20px;
     margin: 15px 0px;
+} */
+.productByNow > button{
+    border: 1px solid #CCCCCC;
+    background-color: white;
+    color: rgb(11, 11, 11);
+    font-weight: 700;
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 20px;
+    margin: 15px 0px;
 }
-.productByNow:hover{
+.productByNow > button:hover{
     /* background-color: #CCCCCC; */
     background-color: rgb(11, 11, 11);
     color: rgb(255, 255, 255);
 }
-.productAddToBag{
+.productAddToBag > button{
+    border: 1px solid #CCCCCC;
+    background-color: white;
+    color: rgb(11, 11, 11);
+    font-weight: 700;
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+/* .productAddToBag{
     border: 1px solid #CCCCCC;
     border-radius: 50px;
     color: rgb(11, 11, 11);
@@ -138,8 +160,8 @@
     padding: 10px 0px;
     font-size: 20px;
     margin-bottom: 50px;
-}
-.productAddToBag:hover{
+} */
+.productAddToBag > button:hover{
     /* border: 1px solid rgb(11, 11, 11); */
     background-color: rgb(11, 11, 11);
     color: rgb(255, 255, 255);

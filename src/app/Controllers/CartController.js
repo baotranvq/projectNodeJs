@@ -55,7 +55,7 @@ class CartController {
                 product_id: productId,
                 size_id: sizeId,
                 color_id: colorId,
-                quantity: quantity,
+                quantity_cart: quantity,
                 created_at: currentDateTime
             }
             console.log("check object cart ->>>>>>>", carts)
@@ -63,12 +63,12 @@ class CartController {
                 let resultCart = await modelCart.checkCart(carts)
                 if(resultCart){
                     console.log("check carttttt trả về ", resultCart);
-                    console.log("check id cart ", resultCart.id);
-                    console.log("check quantity cart ", resultCart.quantity +1);
+                    console.log("check id cart ", resultCart.id_cart);
+                    console.log("check quantity cart ", resultCart.quantity_cart +1);
 
                     let updateCart = {
-                        id: resultCart.id,
-                        quantity: resultCart.quantity +1
+                        id_cart: resultCart.id_cart,
+                        quantity_cart: resultCart.quantity_cart +1
                     }
                     modelCart.plusQuantity(updateCart, function (err, data){
                         if(err) return console.log("Lỗi SQL khi update Quantity",err);
@@ -93,6 +93,8 @@ class CartController {
         }
     }
 
+   
+    
     // postCart = function (req, res) {
     //     let productId = req.body.productId;
     //     let sizeId = req.body.sizeId;

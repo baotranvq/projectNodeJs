@@ -16,16 +16,29 @@
                 <p style="float: left;">Select Size</p>
                 <p><a href="">Size Guide</a></p>
             </div>
+            <form method="post" action="/cart/add-to-cart" onsubmit="return validateForm()">
+                <div class="product-selectSize" id="product-selectSize">
+                    <!-- Render select size tu API  -->
+                </div>
+                <p id="error-message" class="error-message"></p>
+                <div class="productByNow">
+                    <button type="submit">Buy Now</button>
+                </div>
+                <div class="productAddToBag">
+                    <button type="submit">Add to Cart</button>
+                </div>
+                <div id="detail-cart">
+                    <!-- Lấy dữ liệu đến controller cart  -->
+                </div>
+            </form>
             <div class="product-selectSize" id="product-selectSize">
 
                 <!-- Render select size tu API  -->
             </div>
-            
-            <div class="productByNow" type="button">Buy Now</div>
-           
-            <div class="productAddToBag" id="detail-cart" >
-                <!-- Lấy dữ liệu đến cart  -->
-            </div>
+
+
+
+
             <div class="product-textInfomation">
                 <!-- Render description tu API  -->
             </div>
@@ -194,7 +207,7 @@
     <!-- end SHOES SHOW  -->
 </div>
 <script>
-    
+
 
     $ = document.querySelector.bind(document)
     $$ = document.querySelectorAll.bind(document)
@@ -218,8 +231,7 @@
     let colorSize = getUrl()
     // END 
     const urlController = new URL(window.location.href);// lấy url để controller xl
-    const path = urlController.pathname;
-    let selectSizeId = null;
+    const path = urlController.pathname;// lấy url để controller xl
 
     fetch('/users/APIproductsDetail<%=id%>')
         .then(function (res) {
@@ -240,9 +252,9 @@
 
                 if (!uniqueColorNames[colorName]) { // Kiểm tra xem color_name đã xuất hiện chưa
                     if (count == 0) {
-                        href="http://localhost:3000/products/detail/DV5141-${product.color_id}"
+                        // href = "http://localhost:3000/products/detail/DV5141-${product.color_id}"
                         result1.innerHTML = `
-                        <a href="http://localhost:3000/products/detail/DV5141-${product.color_id}" >
+                        <a href="http://localhost:3000/products/detail/${product.code}-${product.color_id}" >
                         <img id ="detail-color-${product.color_id}" class="tab-item border-img" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
                         </a> `
                         count = 1;
@@ -250,17 +262,13 @@
                     } else {
                         //onclick="selectColor(${product.color_id})"
                         result1.innerHTML += `
-                        <a href="http://localhost:3000/products/detail/DV5141-${product.color_id}">
+                        <a href="http://localhost:3000/products/detail/${product.code}-${product.color_id}">
                         <img id ="detail-color-${product.color_id}" class="tab-item" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
                         </a> `
                     }
-
                     uniqueColorNames[colorName] = true; // Đánh dấu color_name đã xuất hiện
                 }
                 // End in các mau giày 
-
-
-
 
                 // In ra các Size giyaf theo màu 
 
@@ -268,13 +276,13 @@
                 if (product.color_id == colorSize) {
                     if (product.quantity === 0) {
                         result2.innerHTML += `
-                        <div id="product-select-size-${product.size_id}" onclick="selectSize(${product.size_id})" type="button" class="detail-size  product-classList-size">${product.size_name}</div>  `
+                        <div  class="detail-size  product-classList-size">${product.size_name}</div>  `
                     } else {
                         result2.innerHTML += `
-                        <div id="product-select-size-${product.size_id}" onclick="selectSize(${product.size_id})" type="button" class="detail-size ">${product.size_name}</div>  `
+                        <label for="product-select-size-${product.size_id}" onclick="selectSize(${product.size_id})" class="detail-size select-size-${product.size_id} ">${product.size_name}</label> 
+                        <input style="display: none;" type="radio" id="product-select-size-${product.size_id}" name="sizeId" onchange="hideErrorMessage()" value="${product.size_id}"> `
                     }
                 }
-
                 // End in ra các Size giày 
 
 
@@ -282,14 +290,9 @@
 
                 if (product.color_id == colorSize && !uniqueColor[colorName]) {
                     document.getElementById('detail-cart').innerHTML = `
-                        <form method="post" action="/cart/add-to-cart">
                             <input type="hidden" name="productId" value="${product.product_id}">
-                            <input type="hidden" name="sizeId" id="sizeId">
                             <input type="hidden" name="colorId" id="colorId" value="${colorSize}">
-                            <input type="hidden" name="previousUrl" value="${path}">
-                            <button  type="submit">Add to Cart</button>
-                        </form>
-                    `
+                            <input type="hidden" name="previousUrl" value="${path}"> `
 
                     $('.product-textInfomation').innerHTML = ` <p>${product.description}</p> `
                     document.getElementById('detail-information').innerHTML = `
@@ -326,34 +329,59 @@
                 // End in ra thông tin shoes 
 
             })
-            
+
         })
         .catch(function (err) {
             console.log("Error: " + err)
         })
 
- // XL chọn size
-    
-    function selectSize(sizeId){
-        selectSizeId = sizeId;
+    // XL chọn size
+
+    function selectSize(sizeId) {
         const classes = document.getElementsByClassName(`detail-size`);
+        console.log("classss",classes)
         for (let i = 0; i < classes.length; i++) {
             classes[i].classList.remove('border-img');
         }
-        document.getElementById(`product-select-size-${sizeId}`).classList.add("border-img");
-        document.getElementById('sizeId').value = selectSizeId;
-        console.log("Check sizeeeee",selectSizeId)
+        document.querySelector(`.select-size-${sizeId}`).classList.add("border-img");
+        console.log("Check sizeeeee", sizeId)
     }
 
- // XL chọn color shoe
-//  function selectColor(colorId){
-//         getColor = colorId;
-//         const classes = document.getElementsByClassName(`tab-item`);
-//         for (let i = 0; i < classes.length; i++) {
-//             classes[i].classList.remove('border-img');
-//         }
-//         document.getElementById(`detail-color-${colorId}`).classList.add("border-img");
-//         document.getElementById('colorId').value = getColor;
-//         console.log("check Colorrrrrrrr",getColor )
-//     }
+    // Xl hiển thị err khi chọn size
+    function validateForm() {
+        var radios = document.getElementsByName("sizeId");
+        var errorMessage = document.getElementById("error-message");
+        var checked = false;
+
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                checked = true;
+                break;
+            }
+        }
+        if (!checked) {
+            errorMessage.innerHTML = "Please select a size.";
+            return false;
+        } else {
+            errorMessage.innerHTML = "";
+            return true;
+        }
+    }
+    function hideErrorMessage() {
+      var errorMessage = document.getElementById("error-message");
+      errorMessage.innerHTML = "";
+    }
+
+
+    // XL chọn color shoe
+    //  function selectColor(colorId){
+    //         getColor = colorId;
+    //         const classes = document.getElementsByClassName(`tab-item`);
+    //         for (let i = 0; i < classes.length; i++) {
+    //             classes[i].classList.remove('border-img');
+    //         }
+    //         document.getElementById(`detail-color-${colorId}`).classList.add("border-img");
+    //         document.getElementById('colorId').value = getColor;
+    //         console.log("check Colorrrrrrrr",getColor )
+    //     }
 </script>

@@ -125,3 +125,55 @@ Lấy thông tin giỏ hàng từ cơ sở dữ liệu dựa trên thông tin ng
 Cập Nhật Session:
 
 Cập nhật session với dữ liệu giỏ hàng mới từ cơ sở dữ liệu.
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="path/to/bootstrap.css"> <!-- Thay đường dẫn bằng đường dẫn thực tế đến file Bootstrap CSS (nếu sử dụng) -->
+    <script defer src="path/to/bootstrap.bundle.min.js"></script> <!-- Thay đường dẫn bằng đường dẫn thực tế đến file Bootstrap JS (nếu sử dụng) -->
+    <script defer src="your-script.js"></script>
+    <title>Quantity Update</title>
+</head>
+<body>
+
+<div>
+    <button onclick="decreaseQuantity()"><i class="bi bi-dash"></i></button>
+    <input type="text" id="quantityInput" onchange="updateQuantity()">
+    <button onclick="increaseQuantity()"><i class="bi bi-plus"></i></button>
+</div>
+
+<script>
+    // Khởi tạo object với trường số lượng
+    const item = { quantity: 10 }; // Thay đổi giá trị số lượng tùy theo yêu cầu
+
+    // Function giảm số lượng
+    function decreaseQuantity() {
+        const inputElement = document.getElementById('quantityInput');
+        let quantity = parseInt(inputElement.value) || 0;
+        quantity = Math.max(0, quantity - 1); // Giảm số lượng, không bao giờ âm
+        inputElement.value = quantity;
+    }
+
+    // Function tăng số lượng
+    function increaseQuantity() {
+        const inputElement = document.getElementById('quantityInput');
+        let quantity = parseInt(inputElement.value) || 0;
+        quantity = Math.min(item.quantity, quantity + 1); // Tăng số lượng, không vượt quá số lượng trong object
+        inputElement.value = quantity;
+    }
+
+    // Function cập nhật số lượng khi nhập vào ô input
+    function updateQuantity() {
+        const inputElement = document.getElementById('quantityInput');
+        let quantity = parseInt(inputElement.value) || 0;
+        quantity = Math.min(item.quantity, Math.max(0, quantity)); // Giới hạn số lượng trong khoảng hợp lý
+        inputElement.value = quantity;
+    }
+</script>
+
+</body>
+</html>

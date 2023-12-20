@@ -4,70 +4,47 @@
 
     <div>
         <div class="main-cartview">
-            <div style="flex-basis: 70%;">
-                <div>
+            <div  style="flex-basis: 70%;">
+                <div class="cart-left">
                     <div id="hide" class="main-panner">
-                        <p>Free Standard Shipping & 30-Day Free Returns For Members. <span style="padding-left: 10px;"><a
-                                    href="">Join Now</a></span><span style="padding-left: 20px; padding-right: 80px;"><a
-                                    href="">View Detail</a></span>
-                        </p>
+                        <p>FREE DELIVERY Applies to orders of 5.000.000₫ or more. </p>
                         <i style="cursor: pointer;" onclick="hide()" class="bi bi-x-lg"></i>
                     </div>
                     <div class="main-textbag">
                         <h4>Bag</h4>
+                        <div>
+                            <button><i class="bi bi-dash"></i></button>
+                            <input type="text">
+                            <button><i class="bi bi-plus"></i></button>
+                        </div>
                     </div>
                     <div id="cart-bag">
-                       <!-- <div class="main-cartitem">
-                            <div class="content-autocontent-auto">
-                                <a href=""><img src="image/nike10.webp" alt=""></a>
-                            </div>
-                            <div class="content-auto1">
-                                <div class="main-cartdata">
-                                    <div class="main-datavertion">
-                                        <a style="text-decoration: none; color: black; font-weight: 500;" href="">Nike Dunk
-                                            Low</a>
-                                        <p>Men's Shoes</p>
-                                        <p>Stadium Green/White/Black</p>
-                                        <div style="display: flex;">
-                                            <p style="padding-right: 30px;">Size 7</p>
-                                            <p>Quatity 1</p>
-                                        </div>
-         
-                                    </div>
-                                    <div>
-                                        <p>S$205.00</p>
-                                    </div>
-                                </div>
-                                <div class="content-ht">
-                                    <a href=""><i style="color: black; font-size: 20px; padding-right: 20px;" class="bi bi-heart"></i></a>
-                                    <a href=""><i style="color: black; font-size: 20px;" class="bi bi-trash3"></i></a>
-                                </div>
-                            </div>
-                        </div> -->
+                        <!-- render cart từ API  -->
                     </div>
-                    
+
                     <!--  -->
                     <div class="content-favourite">
                         <div>
                             <h4>Favourites</h4>
                         </div>
                         <div>
-                            <p>Want to view your favourites? <span><a style="color: black;" href="">Join In</a></span> or <span><a style="color: black;" href="">Sign In</a></span></p>
+                            <p>Want to view your favourites? <span><a style="color: black;" href="">Join In</a></span>
+                                or <span><a style="color: black;" href="">Sign In</a></span></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div style="flex-basis: 30%;">
+            <div class="cart-summary" style="flex-basis: 40%;">
                 <div style="padding-bottom: 30px;">
                     <h4>Summary</h4>
                 </div>
                 <div class="content-question">
                     <div>
-                        <p>Subtotal<i class="bi bi-question-circle"></i></p>
+                        <p>Subtotal <i class="bi bi-question-circle"></i></p>
                     </div>
                     <!-- TOTAL  -->
                     <div>
-                        <!-- <p id="bag-total"> đ</p>   -->
+                        <p class="detail-subtotal"></p> 
                     </div>
                 </div>
                 <div class="content-free">
@@ -75,24 +52,121 @@
                         <p>Estimated Delivery & Handling</p>
                     </div>
                     <div>
-                        <p>Free</p>
+                        <p class="cart-ship"></p>
                     </div>
                 </div>
                 <div class="content-total">
                     <p class="bag-total">Total</p>
-                    <p class="bag-total" id="bag-total"> đ </p>
+                    <p class="cart-total" id="bag-total"></p>
                 </div>
                 <div class="content-click">
-                    <a href="/login.html?"><div class="btn-GuestCheckout" type="button">Guest Checkout</div></a>
-                    <a href="/login.html?"><div class="btn-Checkout" type="button">Menber Checkout</div></a>
+                    <a href="/login.html?">
+                        <div class="btn-GuestCheckout" type="button">Guest Checkout</div>
+                    </a>
+                    <a href="/login.html?">
+                        <div class="btn-Checkout" type="button">Menber Checkout</div>
+                    </a>
                     <!-- <input class="content-clickbt" type="button" value="Guest Checkout">
                     <br>
                     <input class="content-clickbt" type="button" value="Menber Checkout"> -->
                 </div>
             </div>
-            
+
         </div>
-        
+
     </div>
-    
+
 </div>
+<script>
+    const cartApi ='http://localhost:3000/users/APIcarts';
+    async function start(){
+        let aipCarts = await getCarts(); // lấy API to Array
+        renderCarts(aipCarts) // render view cart
+        renderCartSummary(aipCarts) // render view Summary
+    }
+    start();
+
+
+    async function getCarts() {
+        const response = await fetch(cartApi);
+        const carts = await response.json();
+        return carts
+    }
+   
+    function renderCarts(carts){
+        let listCarts = document.querySelector('#cart-bag');
+        let html = carts.map(function(cart){
+            return `
+            <div class="main-cartitem cart-item-${cart.id_cart}">
+                <div class="content-autocontent-auto">
+                    <a href=""><img src="../../.././images/products/${cart.thumbnail_1}" alt=""></a>
+                </div>
+                <div class="content-auto1">
+                    <div class="main-cartdata">
+                        <div class="main-datavertion">
+                            <a style="text-decoration: none; color: black; font-weight: 500;" href="">${cart.product_name}</a>
+                            <p>${cart.type} Shoes</p>
+                            <p>Color: ${cart.color_name}</p>
+                            <div style="display: flex;">
+                                <p style="padding-right: 30px;">${cart.size_name}</p>
+                                <p>Quatity ${cart.quantity_cart}</p>
+                            </div>
+                        </div>
+                        <div class="cart-detail">
+                            ${cart.promotion_price ? `<p class="detail-cardPrice">${(cart.quantity_cart * cart.price).toLocaleString('vi-VN')} đ</p>` : `<p>${(cart.quantity_cart * cart.price).toLocaleString('vi-VN')} đ </p>`}
+                            ${cart.promotion_price ? `<p>${(cart.quantity_cart * cart.promotion_price).toLocaleString('vi-VN')} đ </p>` : ''} 
+                        </div>
+                    </div>
+                    <div class="content-ht">
+                        <button onclick="handleDeleteCart(${cart.id_cart})"><i style="color: black; font-size: 20px;" class="bi bi-trash3"></i></button>
+                    </div>
+                </div>
+            </div>
+            `;
+        })
+        listCarts.innerHTML=html.join('');
+    }
+
+    function renderCartSummary(carts){
+        let cartSummary = document.querySelector('.detail-subtotal');
+        let cartShip = document.querySelector('.cart-ship');
+        let cartTotal = document.querySelector('.cart-total');
+
+        function handlePrice(accumulator, currenValue){
+            let total = currenValue.promotion_price > 0 ? accumulator + (currenValue.promotion_price *currenValue.quantity_cart) :  accumulator +  (currenValue.price*currenValue.quantity_cart)
+            return total;
+        }
+        let totalPrice = carts.reduce(handlePrice,0);// tổng tiền giỏ hàng
+        cartSummary.innerHTML=totalPrice.toLocaleString('vi-VN') +' đ';
+        //XL phí ship hàng
+        totalPrice>5000000 ? cartShip.innerHTML="Free" : cartShip.innerHTML= (250000).toLocaleString('vi-VN') +' đ';
+        //XL tổng đơn hàng
+        totalPrice>5000000 ? cartTotal.innerHTML=totalPrice.toLocaleString('vi-VN')+' đ' : cartTotal.innerHTML=(totalPrice+250000).toLocaleString('vi-VN')+' đ';
+    }
+
+    function handleDeleteCart(id){
+        let options = {
+            method: 'DELETE',
+            headers: {
+                    "Content-Type": "application/json",
+            },
+        }
+        console.log("URL",cartApi+'/'+id)
+        fetch(cartApi+'/'+id, options)
+            .then(function(res){
+                return res.json();
+            })
+            .then(function(){
+                // xử lý xóa elements
+                let cartItem = document.querySelector('.cart-item-'+id);
+                if(cartItem){
+                    cartItem.remove();
+                }
+            });
+            
+        ;
+    }
+  
+
+
+</script>

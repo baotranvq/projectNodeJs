@@ -1,10 +1,23 @@
 .main-cartview {
     display: flex;
     justify-content: center;
-    padding: 50px 80px;
+    padding: 10px 80px;
 }
 .main-cartview > div{
     padding: 0px 10px;
+}
+.cart-left{
+    /* tạo thanh cuộn */
+    /* width: 370px; */
+    height: 600px;
+    overflow-y:auto;
+    scrollbar-width: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.cart-left::-webkit-scrollbar{
+    width: 0 !important;
+    display: none;
 }
 .main-panner {
     display: flex;
@@ -25,12 +38,16 @@
     color: black;
 }
 .main-textbag {
-    padding: 20px 0px;
+    padding-top: 20px;
 }
 .main-cartitem {
     display: flex;
     border-bottom: 1px solid rgb(165, 165, 165);
-    padding-bottom: 50px;
+    padding: 30px 0px;
+}
+.content-ht >button{
+    border: none;
+    background-color: #FFFFFF;
 }
 .content-auto {
     padding-right: 20px ;
@@ -42,20 +59,26 @@
 .main-cartdata {
     display: flex;
     justify-content: space-between;
+    font-size: 16px;
 }
 .main-datavertion p {
     color: rgb(154, 154, 154);
     font-size: 14px;
 }
+.cart-detail > p{
+    font-weight: 600;
+}
 /*  Summary */
 .content-question {
     display: flex;
     justify-content: space-between;
+    font-size: 16px;
 }
 .content-free {
     display: flex;
-    padding-bottom: 20px;
-
+    justify-content: space-between;
+    padding: 20px 0px;
+    font-size: 16px;
 }
 .content-total {
     display: flex;
@@ -63,10 +86,13 @@
     border-bottom: 1px solid rgb(182, 182, 182);
     border-top: 1px solid rgb(182, 182, 182);
     padding: 15px 0px;
-
+    font-size: 16px;
 }
 .content-total > p {
     margin: auto 0px;
+}
+.cart-total{
+    font-weight: 600;
 }
 .content-click div{
     background-color: black;
