@@ -3,6 +3,7 @@ var router = express.Router();
 const usersController = require('../src/app/Controllers/UsersController');
 
 /* GET users listing. */
+router.put('/APIcarts', usersController.updateCart)
 router.delete('/APIcarts/:id', usersController.deleteCart)
 router.use('/APIcarts', usersController.APIcart)
 

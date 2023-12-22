@@ -64,3 +64,10 @@ exports.deleteCart = function(id, callback) {
         callback(err, d); 
     });
 }
+
+exports.updateCart = function(data, callback) { 
+    let sql = `UPDATE carts SET quantity_cart = ? WHERE id_cart = ? `;
+    db.query(sql,[data.quantity_cart,data.id_cart], function(err, d) { 
+        callback(err, d); 
+    });
+}

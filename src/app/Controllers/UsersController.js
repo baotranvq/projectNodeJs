@@ -58,5 +58,16 @@ class UsersController {
             res.json(data)
         })
     }
+
+    updateCart = function(req, res){
+        let dataUpdate = req.body;
+        console.log("Update Carts 2112", dataUpdate);
+        modeCarts.updateCart(dataUpdate,function(err,data){
+            if(err){
+                console.log("Lỗi truy vấn Delete Carts SQL",err);
+            }
+            res.json(data)
+        })
+    }
 }
 module.exports = new UsersController();

@@ -4,7 +4,7 @@
 
     <div>
         <div class="main-cartview">
-            <div  style="flex-basis: 70%;">
+            <div style="flex-basis: 70%;">
                 <div class="cart-left">
                     <div id="hide" class="main-panner">
                         <p>FREE DELIVERY Applies to orders of 5.000.000₫ or more. </p>
@@ -12,11 +12,6 @@
                     </div>
                     <div class="main-textbag">
                         <h4>Bag</h4>
-                        <div>
-                            <button><i class="bi bi-dash"></i></button>
-                            <input type="text">
-                            <button><i class="bi bi-plus"></i></button>
-                        </div>
                     </div>
                     <div id="cart-bag">
                         <!-- render cart từ API  -->
@@ -44,7 +39,7 @@
                     </div>
                     <!-- TOTAL  -->
                     <div>
-                        <p class="detail-subtotal"></p> 
+                        <p class="detail-subtotal"></p>
                     </div>
                 </div>
                 <div class="content-free">
@@ -78,8 +73,8 @@
 
 </div>
 <script>
-    const cartApi ='http://localhost:3000/users/APIcarts';
-    async function start(){
+    const cartApi = 'http://localhost:3000/users/APIcarts';
+    async function start() {
         let aipCarts = await getCarts(); // lấy API to Array
         renderCarts(aipCarts) // render view cart
         renderCartSummary(aipCarts) // render view Summary
@@ -92,10 +87,10 @@
         const carts = await response.json();
         return carts
     }
-   
-    function renderCarts(carts){
+
+    function renderCarts(carts) {
         let listCarts = document.querySelector('#cart-bag');
-        let html = carts.map(function(cart){
+        let html = carts.map(function (cart) {
             return `
             <div class="main-cartitem cart-item-${cart.id_cart}">
                 <div class="content-autocontent-auto">
@@ -117,56 +112,120 @@
                             ${cart.promotion_price ? `<p>${(cart.quantity_cart * cart.promotion_price).toLocaleString('vi-VN')} đ </p>` : ''} 
                         </div>
                     </div>
-                    <div class="content-ht">
+                    <div>
+                        <button><i class="bi bi-dash"></i></button>
+                        <input id="quantity_input_${cart.id_cart}" class="quantity_input" type="text" onchange="handleUpdateQuantityCart(${cart.id_cart}, ${cart.quantity})" value="${cart.quantity_cart}">
+                        <button><i class="bi bi-plus"></i></button>
+                    </div>
+                    <div class="content-ht" >
                         <button onclick="handleDeleteCart(${cart.id_cart})"><i style="color: black; font-size: 20px;" class="bi bi-trash3"></i></button>
                     </div>
                 </div>
             </div>
             `;
         })
-        listCarts.innerHTML=html.join('');
+        listCarts.innerHTML = html.join('');
     }
 
-    function renderCartSummary(carts){
+    function renderCartSummary(carts) {
         let cartSummary = document.querySelector('.detail-subtotal');
         let cartShip = document.querySelector('.cart-ship');
         let cartTotal = document.querySelector('.cart-total');
 
-        function handlePrice(accumulator, currenValue){
-            let total = currenValue.promotion_price > 0 ? accumulator + (currenValue.promotion_price *currenValue.quantity_cart) :  accumulator +  (currenValue.price*currenValue.quantity_cart)
+        function handlePrice(accumulator, currenValue) {
+            let total = currenValue.promotion_price > 0 ? accumulator + (currenValue.promotion_price * currenValue.quantity_cart) : accumulator + (currenValue.price * currenValue.quantity_cart)
             return total;
         }
-        let totalPrice = carts.reduce(handlePrice,0);// tổng tiền giỏ hàng
-        cartSummary.innerHTML=totalPrice.toLocaleString('vi-VN') +' đ';
+        let totalPrice = carts.reduce(handlePrice, 0);// tổng tiền giỏ hàng
+        cartSummary.innerHTML = totalPrice.toLocaleString('vi-VN') + ' đ';
         //XL phí ship hàng
-        totalPrice>5000000 ? cartShip.innerHTML="Free" : cartShip.innerHTML= (250000).toLocaleString('vi-VN') +' đ';
+        if (totalPrice > 5000000) {
+            cartShip.innerHTML = "Free"
+        } else if (totalPrice == 0) {
+            cartShip.innerHTML = 0 + ' đ'
+        } else {
+            cartShip.innerHTML = (250000).toLocaleString('vi-VN') + ' đ'
+        };
+        // totalPrice > 5000000 ? cartShip.innerHTML = "Free" : cartShip.innerHTML = (250000).toLocaleString('vi-VN') + ' đ';
         //XL tổng đơn hàng
-        totalPrice>5000000 ? cartTotal.innerHTML=totalPrice.toLocaleString('vi-VN')+' đ' : cartTotal.innerHTML=(totalPrice+250000).toLocaleString('vi-VN')+' đ';
+        if (totalPrice > 5000000) {
+            cartTotal.innerHTML = totalPrice.toLocaleString('vi-VN') + ' đ'
+        } else if (totalPrice == 0) {
+            cartTotal.innerHTML = 0 + ' đ'
+        } else {
+            cartTotal.innerHTML = (totalPrice + 250000).toLocaleString('vi-VN') + ' đ'
+        };
+        // totalPrice > 5000000 ? cartTotal.innerHTML = totalPrice.toLocaleString('vi-VN') + ' đ' : cartTotal.innerHTML = (totalPrice + 250000).toLocaleString('vi-VN') + ' đ';
     }
 
-    function handleDeleteCart(id){
+    function handleDeleteCart(id) {
         let options = {
             method: 'DELETE',
             headers: {
-                    "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
         }
-        console.log("URL",cartApi+'/'+id)
-        fetch(cartApi+'/'+id, options)
-            .then(function(res){
+        fetch(cartApi + '/' + id, options)
+            .then(function (res) {
                 return res.json();
             })
-            .then(function(){
+            .then(function () {
                 // xử lý xóa elements
-                let cartItem = document.querySelector('.cart-item-'+id);
-                if(cartItem){
+                let cartItem = document.querySelector('.cart-item-' + id);
+                if (cartItem) {
                     cartItem.remove();
+                    return start();
                 }
             });
-            
+
         ;
     }
-  
+
+    // function handleQuantityCart(carts) {
+
+    //     function QuantityCart(id, quantity) {
+    //         const inputElement = document.getElementById("quantity_input")
+    //         let quantityInput = parseInt(inputElement.value) || 0;
+    //         // quantityInput = Math.max(0, quantityInput);
+    //         quantityInput = Math.max(0, Math.min(cart.quantity, quantityInput));
+    //         inputElement.value = quantityInput;
+    //     }
+    // }
+
+    function handleUpdateQuantityCart(id, quantity) {
+
+        const inputElement = document.getElementById("quantity_input_"+id)
+        console.log("Elements", inputElement)
+        let quantityInput = parseInt(inputElement.value) || 0;
+        // quantityInput = Math.max(0, quantityInput);
+        quantityInput = Math.max(0, Math.min(quantity, quantityInput));
+        inputElement.value = quantityInput;
+        let data = {
+            quantity_cart: quantityInput,
+            id_cart: id
+        }
+        let options = {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json ; charset=UTF-8",
+            },
+        }
+        fetch(cartApi, options)
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function () {
+                return start();
+            })
+    }
+
+    function updateQuantity() {
+        const inputElement = document.getElementById("quantity_input")
+        let quantityInput = parseInt(inputElement.value) || 0;
+        quantityInput = Math.max(0, quantityInput);
+        inputElement.value = quantityInput;
+    }
 
 
 </script>
