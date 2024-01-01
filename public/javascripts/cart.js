@@ -1,83 +1,8 @@
-<div class="main-content">
-
-
-
-    <div>
-        <div class="main-cartview">
-            <div id="toast">
-
-            </div>
-            <div style="flex-basis: 70%;">
-                <div class="cart-left">
-                    <div id="hide" class="main-panner">
-                        <p>FREE DELIVERY Applies to orders of 5.000.000₫ or more. </p>
-                        <i style="cursor: pointer;" onclick="hide()" class="bi bi-x-lg"></i>
-                    </div>
-                    <div class="main-textbag">
-                        <h4>Bag</h4>
-                    </div>
-                    <div id="cart-bag">
-                        <!-- render cart từ API  -->
-                    </div>
-
-                    <!--  -->
-                    <div class="content-favourite">
-                        <div>
-                            <h4>Favourites</h4>
-                        </div>
-                        <div>
-                            <p>Want to view your favourites? <span><a style="color: black;" href="">Join In</a></span>
-                                or <span><a style="color: black;" href="">Sign In</a></span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cart-summary" style="flex-basis: 40%;">
-                <div style="padding-bottom: 30px;">
-                    <h4>Summary</h4>
-                </div>
-                <div class="content-question">
-                    <div>
-                        <p>Subtotal <i class="bi bi-question-circle"></i></p>
-                    </div>
-                    <!-- TOTAL  -->
-                    <div>
-                        <p class="detail-subtotal"></p>
-                    </div>
-                </div>
-                <div class="content-free">
-                    <div>
-                        <p>Estimated Delivery & Handling</p>
-                    </div>
-                    <div>
-                        <p class="cart-ship"></p>
-                    </div>
-                </div>
-                <div class="content-total">
-                    <p class="bag-total">Total</p>
-                    <p class="cart-total" id="bag-total"></p>
-                </div>
-                <div class="content-click">
-                    <a href="/login.html?">
-                        <div class="btn-GuestCheckout" type="button">Checkout</div>
-                    </a>
-                    <!-- <input class="content-clickbt" type="button" value="Guest Checkout">
-                    <br>
-                    <input class="content-clickbt" type="button" value="Menber Checkout"> -->
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-<script>
-    const cartApi = '/users/APIcarts';
+const cartApi = 'http://localhost:3000/users/APIcarts';
     async function start() {
-        let apiCarts = await getCarts(); // lấy API to Array
-        renderCarts(apiCarts) // render view cart
-        renderCartSummary(apiCarts) // render view Summary
+        let aipCarts = await getCarts(); // lấy API to Array
+        renderCarts(aipCarts) // render view cart
+        renderCartSummary(aipCarts) // render view Summary
     }
     start();
 
@@ -175,7 +100,6 @@
             .then(function () {
                 // xử lý xóa elements
                 let cartItem = document.querySelector('.cart-item-' + id);
-                renderSuccess()
                 if (cartItem) {
                     cartItem.remove();
                     return start();
@@ -221,56 +145,22 @@
                 return start();
             })
     }
-
-    function increaseQuantity(id, quantity) {
+    
+    function increaseQuantity(id, quantity){
         const inputElement = document.getElementById("quantity_input_" + id)
         let quantityInput = parseInt(inputElement.value) || 0;
-        quantityInput = Math.min(quantity, quantityInput + 1);
+        quantityInput = Math.min(quantity, quantityInput +1);
         inputElement.value = quantityInput;
         // Kích hoạt sự kiện input sau khi thay đổi giá trị
         const event = new Event('input', { bubbles: true });
         inputElement.dispatchEvent(event);
     }
-    function decreaseQuantity(id, quantity) {
+    function decreaseQuantity(id, quantity){
         const inputElement = document.getElementById("quantity_input_" + id)
         let quantityInput = parseInt(inputElement.value) || 0;
-        quantityInput = Math.max(1, quantityInput - 1);
+        quantityInput = Math.max(1,quantityInput -1);
         inputElement.value = quantityInput;
         // Kích hoạt sự kiện input sau khi thay đổi giá trị
         const event = new Event('input', { bubbles: true });
         inputElement.dispatchEvent(event);
     }
-
-    // Show notification successfully
-    function toast({ title = '', message = '' }) {
-        const main = document.getElementById("toast");
-        if (main) {
-            const toast = document.createElement("div");
-            toast.innerHTML = `
-                                <div class="toast-messenges toast-${title}">
-                                    <div class="toast__icon">
-                                        <i class="bi bi-check-circle-fill"></i>
-                                    </div>
-                                    <div class="toast__body">
-                                        <h3 class="toast__title">${title}</h3>
-                                        <p class="toast__msg">${message}</p>
-                                    </div>
-                                </div>
-                            `
-            main.appendChild(toast)
-            setTimeout(function () {
-                main.removeChild(toast)
-            }, 3000)
-        }
-    }
-
-    function renderSuccess() {
-        toast({
-            title: "Success",
-            message: "Product deletion successfully."
-        })
-    }
-
-
-
-</script>

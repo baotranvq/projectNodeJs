@@ -25,76 +25,97 @@ class CartController {
     };
 
     postCart = async function (req, res) {
-        let productId = req.body.productId;
+        let productCode = req.body.productCode;
         let sizeId = req.body.sizeId;
         let colorId = req.body.colorId;
         let userInformation = req.session.user;
         let userId = userInformation.id;
         let quantity = 1;
- 
+
         const previousUrl = req.body.previousUrl // lấy URL để xl quay về lại trang detail
 
         const currentDate = new Date();
         const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1; 
+        const month = currentDate.getMonth() + 1;
         const day = currentDate.getDate();
         const hours = currentDate.getHours();
         const minutes = currentDate.getMinutes();
         const seconds = currentDate.getSeconds();
         const currentDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
-        console.log("check product id: ", productId)
-        console.log("check size id: ", sizeId)
-        console.log("check color id: ", colorId)
-        console.log("check color user: ", userId)
+        // console.log("check product id: ", productCode)
+        // console.log("check size id: ", sizeId)
+        // console.log("check color id: ", colorId)
+        // console.log("check color user: ", userId)
 
 
-        if (productId, sizeId, colorId, userId && sizeId !='') {
-            let carts = {
-                user_id: userId,
-                product_id: productId,
-                size_id: sizeId,
+        if (productCode, sizeId, colorId, userId && sizeId != '') {
+
+            let getproduct = {
+                code: productCode,
                 color_id: colorId,
-                quantity_cart: quantity,
-                created_at: currentDateTime
+                size_id: sizeId
             }
-            console.log("check object cart ->>>>>>>", carts)
             try {
-                let resultCart = await modelCart.checkCart(carts)
-                if(resultCart){
-                    console.log("check carttttt trả về ", resultCart);
-                    console.log("check id cart ", resultCart.id_cart);
-                    console.log("check quantity cart ", resultCart.quantity_cart +1);
-
-                    let updateCart = {
-                        id_cart: resultCart.id_cart,
-                        quantity_cart: resultCart.quantity_cart +1
+                let resultIdProduct = await modelCart.getIdProduct(getproduct)
+                if (resultIdProduct) {
+                    let quantityProduct = resultIdProduct.quantity;
+                    let carts = {
+                        user_id: userId,
+                        product_id: resultIdProduct.product_id,
+                        size_id: sizeId,
+                        color_id: colorId,
+                        quantity_cart: quantity,
+                        created_at: currentDateTime
                     }
-                    modelCart.plusQuantity(updateCart, function (err, data){
-                        if(err) return console.log("Lỗi SQL khi update Quantity",err);
-                        console.log("Đã cập nhật Quantity", data)
-                    })
-                    return res.redirect(previousUrl);
-                }else{
-                    modelCart.createCart(carts, function (err, d) {
-                        if (err) {
-                            console.log("Lỗi SQL ->>>>>>>", err)
+                    let resultCart = await modelCart.checkCart(carts)
+
+                    if (resultCart) {
+                        let quantityCart = resultCart.quantity_cart;
+                        // console.log("check carttttt trả về ", resultCart);
+                        // console.log("check id cart ", resultCart.id_cart);
+                        // console.log("check quantity cart ", resultCart.quantity_cart + 1);
+                        // console.log("quantity product", quantityProduct, "quantity cart", quantityCart);
+                        if (quantityCart < quantityProduct) {
+                            let updateCart = {
+                                id_cart: resultCart.id_cart,
+                                quantity_cart: resultCart.quantity_cart + 1
+                            }
+                            modelCart.plusQuantity(updateCart, function (err, data) {
+                                if (err) return console.log("Lỗi SQL khi update Quantity", err);
+                                console.log("Đã cập nhật Quantity", data)
+                            })
+                            const previousUrlWithVariable = `${previousUrl}?success`;
+                            return res.redirect(previousUrlWithVariable);
                         }
-                    })
-                    return res.redirect(previousUrl);
+                        const previousUrlWithVariable = `${previousUrl}?fail`;
+                        return res.redirect(previousUrlWithVariable);
+
+                    } else {
+                        modelCart.createCart(carts,async function (err, d) {
+                            if (err) {
+                                console.log("Lỗi SQL ->>>>>>>", err)
+                            }
+                        })
+                        let lengthCart = await modelCart.readCartSS(userId)
+                        req.session.cart = lengthCart.length;
+                        const previousUrlWithVariable = `${previousUrl}?success`;
+                        return res.redirect(previousUrlWithVariable);   
+                    }
                 }
+
             } catch (error) {
-                console.log("Lỗi SQL kiểm tra người dùng ->>>>>>>", err)
+                console.log("Lỗi SQL kiểm tra người dùng ->>>>>>>", error)
             }
         }
         else {
             let notification = "Mời bạn chọn đầy đủ thông tin!";
-            return res.redirect(previousUrl,{ error: notification });
+            return res.redirect(previousUrl, { error: notification });
         }
     }
 
-   
-    
+
+
     // postCart = function (req, res) {
     //     let productId = req.body.productId;
     //     let sizeId = req.body.sizeId;
@@ -161,7 +182,7 @@ class CartController {
     //         let notification = "Mời bạn chọn đầy đủ thông tin!";
     //         return res.render('cart', { error: notification })
     //     }
-        
+
     //     // let carts = {
     //     //     productId : productId,
     //     //     sizeId : sizeId,

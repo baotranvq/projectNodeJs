@@ -24,9 +24,12 @@ class checkLogin {
         res.locals.isAuthenticated = req.session && req.session.user;
         if (res.locals.isAuthenticated) {
           res.locals.username = req.session.user.firstname;
+          res.locals.lengthCart = req.session.cart;
         }
         next();
-      };
+    };
+
+
 }
 module.exports = new checkLogin();
 

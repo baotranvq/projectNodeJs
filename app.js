@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 const session = require('express-session');
 
 const middleware = require('./src/app/Middleware/auth.middleware');
+const cartController = require('./src/app//Controllers/CartController');
 
 
 var indexRouter = require('./routes/index');
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // kiểm tra login xl header
 app.use(middleware.logged);
+// app.use(cartController.cart);
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);

@@ -1,12 +1,13 @@
-const modeProducts = require('../Models/product')
-const modeCarts = require('../Models/cart.model')
+const modelProducts = require('../Models/product')
+const modelCart = require('../Models/cart.model')
+const modelCheckout = require('../Models/checkout.model')
 
 class UsersController {
     users = function (req, res) {
         res.send('respond with a resource');
     };
     APIproduct = function (req, res) {
-        modeProducts.product(function(data){
+        modelProducts.product(function(data){
             res.json(data);
         })
     };
@@ -30,9 +31,7 @@ class UsersController {
         // }
         const arr = id.split('-')
         let id_code = arr[0];
-        // console.log("ID: ",id);
-        // console.log("arr:",arr)
-        modeProducts.read(id_code, function(data){
+        modelProducts.read(id_code,async function(data){
             res.json(data);
         })
     };
@@ -40,8 +39,7 @@ class UsersController {
     APIcart= function (req, res) {
         let userInformation = req.session.user;
         let userId = userInformation.id;
-        console.log("APIcart userID", userId);
-        modeCarts.readCart(userId,function(err,data){
+        modelCart.readCart(userId,function(err,data){
             if(err){
                 console.log("Lỗi truy vấn Carts SQL",err);
             }
@@ -49,9 +47,38 @@ class UsersController {
         })
     };
 
+    // deleteCart = async function(req, res){
+    //     let id = req.params.id;
+    //     let userInformation = req.session.user;
+    //     let userId = userInformation.id;
+    //     await modelCart.deleteCart(id)
+    //     let lengthCart= await modelCart.readCartSS(userId)
+    //     req.session.cart = lengthCart.length;
+    // }
     deleteCart = function(req, res){
         let id = req.params.id;
-        modeCarts.deleteCart(id,function(err,data){
+        let userInformation = req.session.user;
+        let userId = userInformation.id;
+        let data = {
+            id_cart: id,
+            user_id: userId
+        }
+        modelCart.deleteCart(data, async function(err,data){
+            if(err){
+                console.log("Lỗi truy vấn Delete Carts SQL",err);
+            }
+            let lengthCart= await modelCart.readCartSS(userId)
+            req.session.cart = lengthCart.length;
+            res.json(data)
+        })
+    }
+
+    updateCart = function(req, res){
+        let dataUpdate = req.body;
+        let userInformation = req.session.user;
+        let userId = userInformation.id;
+        dataUpdate.user_id = userId;// thêm dữ liệu user và object
+        modelCart.updateCart(dataUpdate,function(err,data){
             if(err){
                 console.log("Lỗi truy vấn Delete Carts SQL",err);
             }
@@ -59,15 +86,17 @@ class UsersController {
         })
     }
 
-    updateCart = function(req, res){
-        let dataUpdate = req.body;
-        console.log("Update Carts 2112", dataUpdate);
-        modeCarts.updateCart(dataUpdate,function(err,data){
+    // Checkout GS
+    getCheckoutGs =  function(req, res){
+        let product_id = req.params.id;
+        modelCheckout.getGsCheckout(product_id,function(err,data){
             if(err){
                 console.log("Lỗi truy vấn Delete Carts SQL",err);
             }
-            res.json(data)
+            return res.json(data)
         })
     }
+
+    
 }
 module.exports = new UsersController();

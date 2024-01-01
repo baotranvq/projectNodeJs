@@ -177,3 +177,13 @@ Cập nhật session với dữ liệu giỏ hàng mới từ cơ sở dữ li�
 
 </body>
 </html>
+
+
+
+// Gọi hàm model với await
+const result = await new Promise((resolve, reject) => {
+    models.createGsCheckout(data, (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+    });
+});

@@ -1,5 +1,10 @@
 <div class="product-container">
+    <div id="toast">
+
+    </div>
+
     <div class="product-wrapper">
+
         <div id="detail-product" class="product-wrapper-left">
 
         </div>
@@ -16,16 +21,16 @@
                 <p style="float: left;">Select Size</p>
                 <p><a href="">Size Guide</a></p>
             </div>
-            <form method="post" action="/cart/add-to-cart" onsubmit="return validateForm()">
+            <form id="my-Form" method="post" onsubmit="return validateForm()">
                 <div class="product-selectSize" id="product-selectSize">
                     <!-- Render select size tu API  -->
                 </div>
                 <p id="error-message" class="error-message"></p>
                 <div class="productByNow">
-                    <button type="submit">Buy Now</button>
+                    <button onclick="submitBuyNow()" type="submit">Buy Now</button>
                 </div>
                 <div class="productAddToBag">
-                    <button type="submit">Add to Cart</button>
+                    <button onclick="submitAddToCart()" type="submit">Add to Cart</button>
                 </div>
                 <div id="detail-cart">
                     <!-- Lấy dữ liệu đến controller cart  -->
@@ -173,42 +178,10 @@
         </div>
         <!-- </div> -->
     </div>
-    <div class="product-midText">
-        <p>You Might Also Like</p>
-    </div>
-    <div class="product-show-wrapper">
-        <div id="product-show-slide">
-            <div class="item" style="background-image: url(image/product-shoes1.webp);">
-            </div>
-            <div class="item" style="background-image: url(image/product-shoes2.webp);">
-            </div>
-            <div class="item" style="background-image: url(image/product-shoes4.webp);">
-            </div>
-            <div type="button" class="item" style="background-image: url(image/nike9.webp);">
-            </div>
-            <div class="item" style="background-image: url(image/product-shoes8.webp);">
-            </div>
-            <div class="item" style="background-image: url(image/product-shoes6.webp);">
-            </div>
-            <div class="item" style="background-image: url(image/product-shoes7.webp);">
-            </div>
-            <div class="item" style="background-image: url(image/product-shoes9.webp);">
-            </div>
-            <div class="item" style="background-image: url(image/product-shoes11.webp);">
-            </div>
-            <div class="item" style="background-image: url(image/product-shoes5.webp);">
-            </div>
-        </div>
-        <div class="product-show-buttons">
-            <button id="prev"><i class="bi bi-chevron-left"></i></button>
-            <button id="next"><i class="bi bi-chevron-right"></i></button>
-        </div>
-    </div>
+    
     <!-- end SHOES SHOW  -->
 </div>
 <script>
-
-
     $ = document.querySelector.bind(document)
     $$ = document.querySelectorAll.bind(document)
 
@@ -226,10 +199,14 @@
         let stringUrl = arrUrl[arrUrl.length - 1]
         let arrStrUrl = stringUrl.split('-')
         let resultUrl = arrStrUrl[arrStrUrl.length - 1]
-        return resultUrl
+        let arrColorId = resultUrl.split('?')
+        let colorId = arrColorId[0];
+        return colorId
     }
     let colorSize = getUrl()
+    console.log("xem color: " + colorSize)
     // END 
+
     const urlController = new URL(window.location.href);// lấy url để controller xl
     const path = urlController.pathname;// lấy url để controller xl
 
@@ -239,7 +216,6 @@
             return res.json()
         })
         .then(function (data) {
-
             var uniqueColorNames = {}; // Đối tượng để lưu trữ các color_name đã xuất hiện
             var uniqueColor = {}; // Đối tượng để lưu trữ các color_name đã xuất hiện
             let count = 0;
@@ -252,17 +228,16 @@
 
                 if (!uniqueColorNames[colorName]) { // Kiểm tra xem color_name đã xuất hiện chưa
                     if (count == 0) {
-                        // href = "http://localhost:3000/products/detail/DV5141-${product.color_id}"
                         result1.innerHTML = `
-                        <a href="http://localhost:3000/products/detail/${product.code}-${product.color_id}" >
+                        <a  href="http://localhost:3000/products/detail/${product.code}-${product.color_id}" >
                         <img id ="detail-color-${product.color_id}" class="tab-item border-img" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
-                        </a> `
+                        </a>  `
                         count = 1;
                         getColor = product.color_id;
                     } else {
                         //onclick="selectColor(${product.color_id})"
                         result1.innerHTML += `
-                        <a href="http://localhost:3000/products/detail/${product.code}-${product.color_id}">
+                        <a  href="http://localhost:3000/products/detail/${product.code}-${product.color_id}">
                         <img id ="detail-color-${product.color_id}" class="tab-item" src="../../.././images/products/${product.thumbnail_1}" alt="" width="80px"> 
                         </a> `
                     }
@@ -271,12 +246,11 @@
                 // End in các mau giày 
 
                 // In ra các Size giyaf theo màu 
-
                 let result2 = document.getElementById('product-selectSize')
                 if (product.color_id == colorSize) {
                     if (product.quantity === 0) {
                         result2.innerHTML += `
-                        <div  class="detail-size  product-classList-size">${product.size_name}</div>  `
+                        <div class="detail-size product-classList-size">${product.size_name}</div>  `
                     } else {
                         result2.innerHTML += `
                         <label for="product-select-size-${product.size_id}" onclick="selectSize(${product.size_id})" class="detail-size select-size-${product.size_id} ">${product.size_name}</label> 
@@ -285,12 +259,10 @@
                 }
                 // End in ra các Size giày 
 
-
                 // In ra thông tin shoes 
-
                 if (product.color_id == colorSize && !uniqueColor[colorName]) {
                     document.getElementById('detail-cart').innerHTML = `
-                            <input type="hidden" name="productId" value="${product.product_id}">
+                            <input type="hidden" name="productCode" value="${product.code}">
                             <input type="hidden" name="colorId" id="colorId" value="${colorSize}">
                             <input type="hidden" name="previousUrl" value="${path}"> `
 
@@ -336,19 +308,18 @@
         })
 
     // XL chọn size
-
     function selectSize(sizeId) {
         const classes = document.getElementsByClassName(`detail-size`);
-        console.log("classss",classes)
         for (let i = 0; i < classes.length; i++) {
             classes[i].classList.remove('border-img');
         }
         document.querySelector(`.select-size-${sizeId}`).classList.add("border-img");
-        console.log("Check sizeeeee", sizeId)
     }
+    // end handle select size
 
     // Xl hiển thị err khi chọn size
     function validateForm() {
+        var borderSize = document.querySelector('.product-selectSize')
         var radios = document.getElementsByName("sizeId");
         var errorMessage = document.getElementById("error-message");
         var checked = false;
@@ -361,6 +332,7 @@
         }
         if (!checked) {
             errorMessage.innerHTML = "Please select a size.";
+            borderSize.style.border = "1px solid red"
             return false;
         } else {
             errorMessage.innerHTML = "";
@@ -368,20 +340,76 @@
         }
     }
     function hideErrorMessage() {
-      var errorMessage = document.getElementById("error-message");
-      errorMessage.innerHTML = "";
+        var errorMessage = document.getElementById("error-message");
+        var borderSize = document.querySelector('.product-selectSize')
+        errorMessage.innerHTML = "";
+        borderSize.style.border = "unset"
+    }
+    //end handle select size
+
+    // XL border chọn color shoe
+    function selectColor(colorId) {
+        const classes = document.getElementsByClassName(`tab-item`);
+        for (let i = 0; i < classes.length; i++) {
+            document.querySelector(".tab-item").classList.remove('border-img');
+        }
+        document.getElementById(`detail-color-${colorId}`).classList.add("border-img");
+    }
+    setTimeout(function () {
+        selectColor(colorSize)
+    }, 300)
+    // end handle select color    
+
+    // handle chose submit form to cart and buy now
+    function submitAddToCart() {
+        document.getElementById("my-Form").action = "/cart/add-to-cart"
     }
 
+    function submitBuyNow() {
+        document.getElementById("my-Form").action = "/checkout/buy-now"
+    }
+    // End handle chose submit form and buy now
 
-    // XL chọn color shoe
-    //  function selectColor(colorId){
-    //         getColor = colorId;
-    //         const classes = document.getElementsByClassName(`tab-item`);
-    //         for (let i = 0; i < classes.length; i++) {
-    //             classes[i].classList.remove('border-img');
-    //         }
-    //         document.getElementById(`detail-color-${colorId}`).classList.add("border-img");
-    //         document.getElementById('colorId').value = getColor;
-    //         console.log("check Colorrrrrrrr",getColor )
-    //     }
+    // Show notification successfully
+    function toast({title = '', message=''}) {
+        const main = document.getElementById("toast");
+        if (main) {
+            const toast = document.createElement("div");
+            toast.innerHTML = `
+                                <div class="toast-messenges toast-${title}">
+                                    <div class="toast__icon">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    <div class="toast__body">
+                                        <h3 class="toast__title">${title}</h3>
+                                        <p class="toast__msg">${message}</p>
+                                    </div>
+                                </div>
+                            `
+            main.appendChild(toast)
+            setTimeout(function () {
+                main.removeChild(toast)
+            }, 3000)
+        }
+    }
+
+    function renderSuccess(){
+        let url = window.location.href
+        let arrUrl = url.split('?')
+        let result = arrUrl[arrUrl.length - 1]
+        if(result== "success"){
+            toast({
+                title: "Success",
+                message: "Add to cart successfully"
+            })
+        }
+        if(result== "fail"){
+            toast({
+                title: "Error",
+                message: "Product quantity is not enough."
+            })
+        }
+    }
+    renderSuccess()
+
 </script>

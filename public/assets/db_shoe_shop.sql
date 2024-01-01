@@ -42,3 +42,17 @@ create table product(
 INSERT INTO `images` (`id`, `thumbnail_1`, `big_image_1`, `thumbnail_2`, `big_image_2`, `thumbnail_3`, `big_image_3`, `thumbnail_4`, `big_image_4`) VALUES (NULL, 'jordan-nu-retro-1-low-thumbnail1.png', 'jordan-nu-retro-1-low-big1.png', 'jordan-nu-retro-1-low-thumbnail2.png', 'jordan-nu-retro-1-low-big2.png', 'jordan-nu-retro-1-low-thumbnail3.png', 'jordan-nu-retro-1-low-big3.png', 'jordan-nu-retro-1-low-thumbnail4.png', 'jordan-nu-retro-1-low-big4.png');
 INSERT INTO `sizes` (`id`, `size_name`) VALUES (NULL, 'EU 42'), (NULL, 'EU 43');
 
+
+CREATE TABLE orderguest (
+    orderguest_id int(11) AUTO_INCREMENT PRIMARY KEY,
+    customer_name varchar(255),
+    customer_email varchar(255),
+    customer_phone varchar(255),
+    customer_address varchar(255),
+    orderguest_product_id int(11),
+    orderguest_total_price 	decimal(10,2),
+    orderguest_quantity int(11),
+    orderguest_date date,
+   	orderguest_status int(11),
+    FOREIGN KEY (orderguest_product_id) REFERENCES product(product_id)
+)

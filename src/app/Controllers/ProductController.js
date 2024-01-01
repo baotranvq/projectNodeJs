@@ -1,6 +1,11 @@
 
 class ProductController {
     
+
+    search = function (req, res) {
+        let valueInput = req.body.search;
+        res.render('products/search',{search: valueInput});
+    };
     menJordanShoes = function (req, res) {
         res.render('products/men-jordan-shoes');
     };

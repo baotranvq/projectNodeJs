@@ -1,5 +1,5 @@
 modelUser = require('../../Models/user.model');
-
+modelCart = require('../../Models/cart.model');
 const bcrypt = require('bcryptjs');
 
 
@@ -21,10 +21,12 @@ class LoginController {
                     return res.render('auth/login', { error: notification });
                 }
                 else {
+                    let resultCart = await modelCart.readCartSS(resultUser.id)
                     bcrypt.compare(password, resultUser.password, function (err, result) {
                         if (result === true) {
                             req.session.loggedIn = true;
                             req.session.user = resultUser;
+                            req.session.cart = resultCart.length; // lưu thông tin cart khi đăng nhập
                             res.redirect('/');
                         } else {
                             let notification = "Password is incorrect";

@@ -1,16 +1,10 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
-</head>
-
 <div class="listProduct-wrapper">
 
     <div class="listProduct-text-typeShoe">
         <p id="product-title"></p>
     </div>
     <div>
-        <h4 style="font-size: 28px;" id="listProduct-jondan"></h4>
+        <h4 id="listProduct-jondan"></h4>
     </div>
 
     <div class="listProduct-layout">
@@ -19,7 +13,7 @@
                 <ul class="listProduct-menuList">
                     <li><a href="">Ari Max 1</a></li>
                     <li><a href="">Ari Max 90</a></li>
-                    <li style="text-decoration:underline;"><a href="">Jordan</a></li>
+                    <li style="text-decoration:underline;"><a href="">Ari Max 95</a></li>
                     <li><a href="">Ari Max 97</a></li>
                     <li><a href="">Ari Max 270</a></li>
                     <li><a href="">Ari Max Pluse</a></li>
@@ -188,7 +182,7 @@
         </div>
         <!-- end Side Bar -->
         <div class="listProduct-content">
-
+            <div class="search-not-found"></div>
             <div class="listProduct-contentItem" id="shoe">
                 <!-- CARD  -->
             </div>
@@ -211,83 +205,55 @@
     </div>
 
 </div>
-<!-- <script src="./javascripts/product.js"></script> -->
 <script>
-    // async function fetchData(){
-    //     try{
-    //         let response  = await fetch("http://localhost:3000/users/APIproducts")
-    //         let data =      response.json();
-    //         let result = document.getElementById('shoe');
-    //         let count = 0;
-    //         let Categories='';
-    //         let typeShoe='';
-    //         data.forEach(element => {
-    //             count ++;
-    //             Categories = `${element.categories_name}`
-    //             typeShoe = `${element.type}`
-    //             result.innerHTML += `
-    //                 <a href="./detail/${element.code}-${element.color_name}">
-    //                 <div type="button" class="cardItem">
-    //                     <div class="product-img-wrapper">
-    //                     <img class="" src="../../.././images/products/${element.big_image_1}" alt="card image" >
-    //                     </div> 
-    //                     <div class="card-body">
-    //                         <h5 class="card-name" >${element.product_name}</h5>
-    //                         <p class="card-type">${element.type} Shoes</p>
-    //                         <div class="product-view-price">
-    //                             ${ element.promotion_price >0 ? `<p class="card-price has-promotion">${element.price.toLocaleString('vi-VN')} đ </p>` : `<p class="card-price">${element.price.toLocaleString('vi-VN')} đ </p>`}        
-    //                             ${ element.promotion_price >0 ? `<p class="card-promotion-price">${element.promotion_price.toLocaleString('vi-VN')} đ </p>` : ''}                                
-    //                         </div>                         
-    //                     </div>  
-    //                 </div>
-    //                 </a>`
-    //         });
-    //         document.getElementById('listProduct-jondan').innerHTML= typeShoe +' '+ Categories+" Shoes (" +count+ ")";
-    //         document.getElementById('product-title').innerHTML=Categories+" / Shoes ";
-    //     }
-    //     catch(error){
-    //         console.error("Error:", error);
-    //     }
-        
+    const cartApi = '/users/APIproducts';
+    const valueInput = "<%= search%>"
+    async function start(){
+        let apiProduct = await getProducts(); // lấy API to Array
+        let arrSearch = handleSearch(apiProduct, valueInput);
+        renderProductSearch(arrSearch,valueInput);
+    }
+    start();
 
-    // }
-
-    // fetchData()
-
-    fetch('/users/APIproducts')
-        .then(function (res) {
-            // console.log(res);
-            // console.log(res.json())
-            return res.json();
+    async function getProducts() {
+        const response = await fetch(cartApi);
+        const carts = await response.json();
+        return carts
+    }
+    function handleSearch(arrs, value){
+        const lowercasedValue = value.toLowerCase();// chuyển đổi valueInput thành chữ thường
+        let result = arrs.filter(function(arr){
+            return arr.product_name.toLowerCase().includes(lowercasedValue);
         })
-        .then(function (data) {
-            let result = document.getElementById('shoe');
-            let count = 0;
-            let Categories='';
-            let typeShoe='';
-            data.forEach(element => {
-                count ++;
-                Categories = `${element.categories_name}`
-                typeShoe = `${element.type}`
-                result.innerHTML += `
-                    <a href="./detail/${element.code}-${element.color_id}">
-                    <div type="button" class="cardItem">
-                        <div class="product-img-wrapper">
-                        <img class="" src="../../.././images/products/${element.big_image_1}" alt="card image" >
-                        </div> 
-                        <div class="card-body">
-                            <h5 style="font-size: 20px;" class="card-name" >${element.product_name}</h5>
-                            <p class="card-type">${element.type} Shoes</p>
-                            <div class="product-view-price">
-                                ${ element.promotion_price >0 ? `<p class="card-price has-promotion">${element.price.toLocaleString('vi-VN')} đ </p>` : `<p class="card-price">${element.price.toLocaleString('vi-VN')} đ </p>`}        
-                                ${ element.promotion_price >0 ? `<p class="card-promotion-price">${element.promotion_price.toLocaleString('vi-VN')} đ </p>` : ''}                                
-                            </div>                         
-                        </div>  
-                    </div>
-                    </a>`
-            });
-            document.getElementById('listProduct-jondan').innerHTML= typeShoe +' '+ Categories+" Shoes (" +count+ ")";
-            document.getElementById('product-title').innerHTML=Categories+" / Shoes ";
-        })
+        return result;
+    }
 
+    function renderProductSearch(product, value){
+        let listSearch = document.getElementById('shoe');
+        let html = product.map(function(item){
+            return`
+                    <a href="./detail/${item.code}-${item.color_id}">
+                        <div type="button" class="cardItem">
+                            <div class="product-img-wrapper">
+                            <img class="" src="../../.././images/products/${item.big_image_1}" alt="card image" >
+                            </div> 
+                            <div class="card-body">
+                                <h5 style="font-size: 20px;" class="card-name" >${item.product_name}</h5>
+                                <p class="card-type">${item.type} Shoes</p>
+                                <div class="product-view-price">
+                                    ${ item.promotion_price >0 ? `<p class="card-price has-promotion">${item.price.toLocaleString('vi-VN')} đ </p>` : `<p class="card-price">${item.price.toLocaleString('vi-VN')} đ </p>`}        
+                                    ${ item.promotion_price >0 ? `<p class="card-promotion-price">${item.promotion_price.toLocaleString('vi-VN')} đ </p>` : ''}                                
+                                </div>                         
+                            </div>  
+                        </div>
+                    </a>
+            `
+        })
+        if(html.length == 0){
+            document.querySelector(".search-not-found").innerHTML = `<h3 style="text-align: center;font-size: 28px;font-weight:600;">We could not find anything for "${value}".</h3>`
+        }else{
+            listSearch.innerHTML = html.join('');
+        }
+    }
+    
 </script>

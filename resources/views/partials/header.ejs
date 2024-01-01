@@ -1,358 +1,381 @@
-
 <!-- HEADER -->
 <div class="header">
     <div class="header-first">
-        <a href=""><img src="/images/header/Jumpman_logo.svg.png" alt=""></a>
-        <ul >
+        <a href="/"><img src="/images/header/Jumpman_logo.svg.png" alt=""></a>
+        <ul style="position: relative;">
             <li><a href="">Find a Store</a></li>
             <li><a href="">Help</a></li>
-            <% if (isAuthenticated) { %>        
-                <li><a id="header-first-user" href="">Hi,<%= username%> </a></li>
-                <i class="bi bi-person"></i>                       
-            <% } else { %>
-                <li><a href="">Join Us</a></li>
-                <li><a style="border: none; padding-right: 0px;" href="">Sign In</a></li>
-            <% } %>
+            <% if (isAuthenticated) { %>
+                <li ><a id="header-first-user">Hi,<%= username%> </a></li>
+                <div>
+                    <i style="cursor:pointer;" onmousemove="hoverAccount()" class="bi bi-person">
+                        <div class="header-login-menu">
+                            <ul>
+                                <li style="padding: 20px 0px; "><a style="color: black ;font-size: 18px;" href="">Account</a>
+                                </li>
+                                <li><a href="">Profile</a></li>
+                                <li><a href="">Account Settings</a></li>
+                                <li><a href="/auth/logout">Log Out</a></li>
+                            </ul>
+                        </div>
+                    </i>
+                </div>
+                <% } else { %>
+                    <li><a href="/auth/register">Join Us</a></li>
+                    <li><a style="border: none; padding-right: 0px;" href="/auth/login">Sign In</a></li>
+                    <% } %>
         </ul>
     </div>
-    
+
     <div class="header-second">
         <nav class="header-navbar">
-            <a class="header-logo-nike" href=""><img src="/images/header/download.png" alt=""></a>
+            <a class="header-logo-nike" href="/"><img src="/images/header/download.png" alt=""></a>
 
-                <ul class="main-menu">
-                    <li><a href=" ">New & Featured</a>
-                        <div class="dvsub-menu">
-                            <div class="dsub-menu">
-                                <ul class="sub-menu">
-                                    <li><a href="">New & Featured</a></li>
-                                    <li><a href="">New Arrivals</a></li>
-                                    <li><a href="">Latest Shoes</a></li>
-                                    <li><a href="">Lastest Clothing</a></li>
-                                    <li><a href="">SNKRS Launch Calendar</a></li>
-                                    <li><a href="">Customise with Nike By You</a></li>
-                                    <li><a href="">Nike App Exclusives</a></li>
-                                    <li><a href="">Bestsellers</a></li>
-                                    <li><a href="">Member Exclusive</a></li>
-                                    <li><a href="">Top Kicks Under 3,000,000đ</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="">Shop Icons</a></li>
-                                    <li><a href="">Air Force 1</a></li>
-                                    <li><a href="">Air Jordan 1</a></li>
-                                    <li><a href="">Air Max</a></li>
-                                    <li><a href="">Dunk</a></li>
-                                    <li><a href="">Blazer</a></li>
-                                    <li><a href="">Pegasus</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="">New For Men</a></li>
-                                    <li><a href="">Shoes</a></li>
+            <ul class="main-menu">
+                <li><a href=" ">New & Featured</a>
+                    <div class="dvsub-menu">
+                        <div class="dsub-menu">
+                            <ul class="sub-menu">
+                                <li><a href="">New & Featured</a></li>
+                                <li><a href="">New Arrivals</a></li>
+                                <li><a href="">Latest Shoes</a></li>
+                                <li><a href="">Lastest Clothing</a></li>
+                                <li><a href="">SNKRS Launch Calendar</a></li>
+                                <li><a href="">Customise with Nike By You</a></li>
+                                <li><a href="">Nike App Exclusives</a></li>
+                                <li><a href="">Bestsellers</a></li>
+                                <li><a href="">Member Exclusive</a></li>
+                                <li><a href="">Top Kicks Under 3,000,000đ</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">Shop Icons</a></li>
+                                <li><a href="">Air Force 1</a></li>
+                                <li><a href="">Air Jordan 1</a></li>
+                                <li><a href="">Air Max</a></li>
+                                <li><a href="">Dunk</a></li>
+                                <li><a href="">Blazer</a></li>
+                                <li><a href="">Pegasus</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">New For Men</a></li>
+                                <li><a href="">Shoes</a></li>
+                                <li><a href="">Clothing</a></li>
+                                <li><a href="">Accessories</a></li>
+                                <li><a href="">Shop All New</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">New For Women</a></li>
+                                <li><a href="">Shoes</a></li>
+                                <li><a href="">Clothing</a></li>
+                                <li><a href="">Accessories</a></li>
+                                <li><a href="">Shop All New</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">New For Kids</a></li>
+                                <li><a href="">Shoes</a></li>
+                                <li><a href="">Clothing</a></li>
+                                <li><a href="">Accessories</a></li>
+                                <li><a href="">Shop All New</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/products/men-jordan-shoes">Men</a>
+                    <div class="dvsub-menu">
+                        <div class="dsub-menu">
+                            <ul class="sub-menu">
+                                <li><a href="">Featured</a></li>
+                                <li><a href="">New Releases</a></li>
+                                <li><a href="">Member Exclusive</a></li>
+                                <li><a href="">Jordan</a></li>
+                                <li><a href="">Football Club Kits</a></li>
+                                <li><a href="">Customise with Nike By You</a></li>
+                                <li><a href="">Last Sizes Available</a></li>
+                                <li><a href="">Sale</a></li>
+                                <li><a href="">Running Shoe Finder</a></li>
+                                <li><a href="">Sustainable Materials</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">Shoe</a></li>
+                                <li><a href="">All Shoes</a></li>
+                                <li><a href="">Newest Sneakers</a></li>
+                                <li><a href="">Lifestyle</a></li>
+                                <li><a href="">Jordan</a></li>
+                                <li><a href="">Running</a></li>
+                                <li><a href="">Basketball</a></li>
+                                <li><a href="">Football</a></li>
+                                <li><a href="">Gym and Training</a></li>
+                                <li><a href="">Sandals and Slides</a></li>
+                                <li><a href="">Last Sizes Available</a></li>
+                                <li><a href="">Customise with Nike By You</a></li>
+                                <li><a href="">Top Picks Under 3,000,000đ</a></li>
+                            </ul>
+                            <div>
+                                <ul style="padding-bottom: 30px;" class="sub-menu">
                                     <li><a href="">Clothing</a></li>
-                                    <li><a href="">Accessories</a></li>
-                                    <li><a href="">Shop All New</a></li>
+                                    <li><a href="">All Clothing</a></li>
+                                    <li><a href="">Top and T-Shirts</a></li>
+                                    <li><a href="">Shorts</a></li>
+                                    <li><a href="">Pants and Leggings</a></li>
+                                    <li><a href="">Hoodies and Sweatshirts</a></li>
+                                    <li><a href="">Jackets and Gilets</a></li>
+                                    <li><a href="">Jerseys and Kits</a></li>
+                                    <li><a href="">Jordan</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="">New For Women</a></li>
-                                    <li><a href="">Shoes</a></li>
-                                    <li><a href="">Clothing</a></li>
-                                    <li><a href="">Accessories</a></li>
-                                    <li><a href="">Shop All New</a></li>
+                                    <li><a href="">Accessories and Equipment</a></li>
+                                    <li><a href="">All Accessories and Equipment</a></li>
+                                    <li><a href="">Bags and Backpacks</a></li>
+                                    <li><a href="">Socks</a></li>
+                                    <li><a href="">Hats and Headwear</a></li>
                                 </ul>
+                            </div>
+                            <div>
+                                <ul style="padding-bottom: 30px;" class="sub-menu">
+                                    <li><a href="">Shop By Sport</a></li>
+                                    <li><a href="">Running</a></li>
+                                    <li><a href="">Football</a></li>
+                                    <li><a href="">Basketball</a></li>
+                                    <li><a href="">Gym and Training</a></li>
+                                    <li><a href="">Yoga</a></li>
+                                    <li><a href="">Skateboarding</a></li>
+                                    <li><a href="">Tennis</a></li>
+                                    <li><a href="">Golf</a></li>
+                                </ul>
+
                                 <ul class="sub-menu">
-                                    <li><a href="">New For Kids</a></li>
-                                    <li><a href="">Shoes</a></li>
-                                    <li><a href="">Clothing</a></li>
-                                    <li><a href="">Accessories</a></li>
-                                    <li><a href="">Shop All New</a></li>
+                                    <li><a href="">Shop By Brand</a></li>
+                                    <li><a href="">Nike Sportswear</a></li>
+                                    <li><a href="">NikeLab</a></li>
+                                    <li><a href="">Nike By You</a></li>
+                                    <li><a href="">Jordan</a></li>
+                                    <li><a href="">ACG</a></li>
+                                    <li><a href="">NBA</a></li>
+                                    <li><a href="">Nike SB</a></li>
                                 </ul>
                             </div>
                         </div>
-                    </li>
-                    <li><a href="">Men</a>
-                        <div class="dvsub-menu">
-                            <div class="dsub-menu">
+                    </div>
+                </li>
+                <li><a href="">Women</a>
+                    <div class="dvsub-menu">
+                        <div class="dsub-menu">
+                            <ul class="sub-menu">
+                                <li><a href="">Featured</a></li>
+                                <li><a href="">Bestsellers</a></li>
+                                <li><a href="">Member Exclusive</a></li>
+                                <li><a href="">Jordan</a></li>
+                                <li><a href="">Bra and Legging Dous</a></li>
+                                <li><a href="">Customise with Nike By You</a></li>
+                                <li><a href="">Last Sizes Available</a></li>
+                                <li><a href="">Sale</a></li>
+                                <li><a href="">Find Your Fell - Nike Legginngs</a></li>
+                                <li><a href="">Running Shoe Finder</a></li>
+                                <li><a href="">Sustainable Materials</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">Shoe</a></li>
+                                <li><a href="">All Shoes</a></li>
+                                <li><a href="">Newest Sneakers</a></li>
+                                <li><a href="">Lifestyle</a></li>
+                                <li><a href="">Jordan</a></li>
+                                <li><a href="">Running</a></li>
+                                <li><a href="">Gym and Traning</a></li>
+                                <li><a href="">Sandals and Slides</a></li>
+                                <li><a href="">Basketball</a></li>
+                                <li><a href="">Football</a></li>
+                                <li><a href="">Last Sizes Available</a></li>
+                                <li><a href="">Customise with Nike By You</a></li>
+                                <li><a href="">Top Picks Under 3,000,000đ</a></li>
+                            </ul>
+                            <div>
+                                <ul style="padding-bottom: 30px;" class="sub-menu">
+                                    <li><a href="">Clothing</a></li>
+                                    <li><a href="">All Clothing</a></li>
+                                    <li><a href="">Performance Essentials</a></li>
+                                    <li><a href="">Top and T-Shirts</a></li>
+                                    <li><a href="">Sports Bras</a></li>
+                                    <li><a href="">Pants and Leggings</a></li>
+                                    <li><a href="">Shorts</a></li>
+                                    <li><a href="">Hoodies and Sweatshirts</a></li>
+                                    <li><a href="">Jackets and Gilets</a></li>
+                                    <li><a href="">Skirts abd Dresses</a></li>
+                                    <li><a href="">Modest Wear</a></li>
+                                    <li><a href="">Nike Maternity</a></li>
+                                    <li><a href="">Plus Size</a></li>
+                                </ul>
                                 <ul class="sub-menu">
+                                    <li><a href="">Accessories and Equipment</a></li>
+                                    <li><a href="">All Accessories and Equipment</a></li>
+                                    <li><a href="">Bags and Backpacks</a></li>
+                                    <li><a href="">Socks</a></li>
+                                    <li><a href="">Hats and Headwear</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul style="padding-bottom: 30px;" class="sub-menu">
+                                    <li><a href="">Shop By Sport</a></li>
+                                    <li><a href="">Yoga</a></li>
+                                    <li><a href="">Running</a></li>
+                                    <li><a href="">Gym and Training</a></li>
+                                    <li><a href="">Basketball</a></li>
+                                    <li><a href="">Tennis</a></li>
+                                    <li><a href="">Golf</a></li>
+                                    <li><a href="">Football</a></li>
+                                    <li><a href="">Skateboarding</a></li>
+                                </ul>
+
+                                <ul class="sub-menu">
+                                    <li><a href="">Shop By Brand</a></li>
+                                    <li><a href="">Nike Sportswear</a></li>
+                                    <li><a href="">NikeLab</a></li>
+                                    <li><a href="">Nike By You</a></li>
+                                    <li><a href="">Jordan</a></li>
+                                    <li><a href="">ACG</a></li>
+                                    <li><a href="">NBA</a></li>
+                                    <li><a href="">Nike SB</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="">Kid</a>
+                    <div class="dvsub-menu">
+                        <div class="dsub-menu">
+                            <div>
+                                <ul style="padding-bottom: 30px;" class="sub-menu">
                                     <li><a href="">Featured</a></li>
                                     <li><a href="">New Releases</a></li>
-                                    <li><a href="">Member Exclusive</a></li>
-                                    <li><a href="">Jordan</a></li>
-                                    <li><a href="">Football Club Kits</a></li>
-                                    <li><a href="">Customise with Nike By You</a></li>
-                                    <li><a href="">Last Sizes Available</a></li>
-                                    <li><a href="">Sale</a></li>
-                                    <li><a href="">Running Shoe Finder</a></li>
-                                    <li><a href="">Sustainable Materials</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="">Shoe</a></li>
-                                    <li><a href="">All Shoes</a></li>
                                     <li><a href="">Newest Sneakers</a></li>
-                                    <li><a href="">Lifestyle</a></li>
-                                    <li><a href="">Jordan</a></li>
-                                    <li><a href="">Running</a></li>
-                                    <li><a href="">Basketball</a></li>
-                                    <li><a href="">Football</a></li>
-                                    <li><a href="">Gym and Training</a></li>
-                                    <li><a href="">Sandals and Slides</a></li>
-                                    <li><a href="">Last Sizes Available</a></li>
-                                    <li><a href="">Customise with Nike By You</a></li>
-                                    <li><a href="">Top Picks Under 3,000,000đ</a></li>
-                                </ul>
-                                <div>
-                                    <ul style="padding-bottom: 30px;" class="sub-menu">
-                                        <li><a href="">Clothing</a></li>
-                                        <li><a href="">All Clothing</a></li>
-                                        <li><a href="">Top and T-Shirts</a></li>
-                                        <li><a href="">Shorts</a></li>
-                                        <li><a href="">Pants and Leggings</a></li>
-                                        <li><a href="">Hoodies and Sweatshirts</a></li>
-                                        <li><a href="">Jackets and Gilets</a></li>
-                                        <li><a href="">Jerseys and Kits</a></li>
-                                        <li><a href="">Jordan</a></li>
-                                    </ul>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Accessories and Equipment</a></li>
-                                        <li><a href="">All Accessories and Equipment</a></li>
-                                        <li><a href="">Bags and Backpacks</a></li>
-                                        <li><a href="">Socks</a></li>
-                                        <li><a href="">Hats and Headwear</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <ul style="padding-bottom: 30px;" class="sub-menu">
-                                        <li><a href="">Shop By Sport</a></li>
-                                        <li><a href="">Running</a></li>
-                                        <li><a href="">Football</a></li>
-                                        <li><a href="">Basketball</a></li>
-                                        <li><a href="">Gym and Training</a></li>
-                                        <li><a href="">Yoga</a></li>
-                                        <li><a href="">Skateboarding</a></li>
-                                        <li><a href="">Tennis</a></li>
-                                        <li><a href="">Golf</a></li>
-                                    </ul>
-
-                                    <ul class="sub-menu">
-                                        <li><a href="">Shop By Brand</a></li>
-                                        <li><a href="">Nike Sportswear</a></li>
-                                        <li><a href="">NikeLab</a></li>
-                                        <li><a href="">Nike By You</a></li>
-                                        <li><a href="">Jordan</a></li>
-                                        <li><a href="">ACG</a></li>
-                                        <li><a href="">NBA</a></li>
-                                        <li><a href="">Nike SB</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="">Women</a>
-                        <div class="dvsub-menu">
-                            <div class="dsub-menu">
-                                <ul class="sub-menu">
-                                    <li><a href="">Featured</a></li>
                                     <li><a href="">Bestsellers</a></li>
                                     <li><a href="">Member Exclusive</a></li>
                                     <li><a href="">Jordan</a></li>
-                                    <li><a href="">Bra and Legging Dous</a></li>
-                                    <li><a href="">Customise with Nike By You</a></li>
+                                    <li><a href="">Bags and Backpacks</a></li>
                                     <li><a href="">Last Sizes Available</a></li>
                                     <li><a href="">Sale</a></li>
-                                    <li><a href="">Find Your Fell - Nike Legginngs</a></li>
-                                    <li><a href="">Running Shoe Finder</a></li>
-                                    <li><a href="">Sustainable Materials</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="">Shoe</a></li>
+                                    <li><a href="">Kids By Age</a></li>
+                                    <li><a href="">Older Kids( 7 - 14 years)</a></li>
+                                    <li><a href="">Younger Kids (4 - 7 years)</a></li>
+                                    <li><a href="">Babies & Toddlers (0 - 4 years)</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul style="padding-bottom: 30px;" class="sub-menu">
+                                    <li><a href="">Boys' Shoes</a></li>
                                     <li><a href="">All Shoes</a></li>
-                                    <li><a href="">Newest Sneakers</a></li>
+                                    <li><a href="">Older Boys (7 - 14 years)</a></li>
+                                    <li><a href="">Younger Boy (4 - 7 years)</a></li>
+                                    <li><a href="">Babies and Toddlers (0 - 4 years)</a></li>
                                     <li><a href="">Lifestyle</a></li>
                                     <li><a href="">Jordan</a></li>
                                     <li><a href="">Running</a></li>
-                                    <li><a href="">Gym and Traning</a></li>
-                                    <li><a href="">Sandals and Slides</a></li>
                                     <li><a href="">Basketball</a></li>
                                     <li><a href="">Football</a></li>
-                                    <li><a href="">Last Sizes Available</a></li>
-                                    <li><a href="">Customise with Nike By You</a></li>
-                                    <li><a href="">Top Picks Under 3,000,000đ</a></li>
+                                    <li><a href="">Sandals and Slides</a></li>
                                 </ul>
-                                <div>
-                                    <ul style="padding-bottom: 30px;" class="sub-menu">
-                                        <li><a href="">Clothing</a></li>
-                                        <li><a href="">All Clothing</a></li>
-                                        <li><a href="">Performance Essentials</a></li>
-                                        <li><a href="">Top and T-Shirts</a></li>
-                                        <li><a href="">Sports Bras</a></li>
-                                        <li><a href="">Pants and Leggings</a></li>
-                                        <li><a href="">Shorts</a></li>
-                                        <li><a href="">Hoodies and Sweatshirts</a></li>
-                                        <li><a href="">Jackets and Gilets</a></li>
-                                        <li><a href="">Skirts abd Dresses</a></li>
-                                        <li><a href="">Modest Wear</a></li>
-                                        <li><a href="">Nike Maternity</a></li>
-                                        <li><a href="">Plus Size</a></li>
-                                    </ul>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Accessories and Equipment</a></li>
-                                        <li><a href="">All Accessories and Equipment</a></li>
-                                        <li><a href="">Bags and Backpacks</a></li>
-                                        <li><a href="">Socks</a></li>
-                                        <li><a href="">Hats and Headwear</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <ul style="padding-bottom: 30px;" class="sub-menu">
-                                        <li><a href="">Shop By Sport</a></li>
-                                        <li><a href="">Yoga</a></li>
-                                        <li><a href="">Running</a></li>
-                                        <li><a href="">Gym and Training</a></li>
-                                        <li><a href="">Basketball</a></li>
-                                        <li><a href="">Tennis</a></li>
-                                        <li><a href="">Golf</a></li>
-                                        <li><a href="">Football</a></li>
-                                        <li><a href="">Skateboarding</a></li>
-                                    </ul>
+                                <ul class="sub-menu">
+                                    <li><a href=""></a>Boys' Clothing</li>
+                                    <li><a href="">Tops and T-Shirts</a></li>
+                                    <li><a href="">Hoodies and Sweatshirts</a></li>
+                                    <li><a href="">Shorts</a></li>
+                                    <li><a href="">All Boys' Clothing</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul style="padding-bottom: 30px;" class="sub-menu">
+                                    <li><a href="">Girls' Shoes</a></li>
+                                    <li><a href="">All Shoes</a></li>
+                                    <li><a href="">Older Boys (7 - 14 years)</a></li>
+                                    <li><a href="">Younger Boy (4 - 7 years)</a></li>
+                                    <li><a href="">Babies and Toddlers (0 - 4 years)</a></li>
+                                    <li><a href="">Lifestyle</a></li>
+                                    <li><a href="">Jordan</a></li>
+                                    <li><a href="">Running</a></li>
+                                    <li><a href="">Basketball</a></li>
+                                    <li><a href="">Football</a></li>
+                                    <li><a href="">Sandals and Slides</a></li>
+                                </ul>
+                                <ul class="sub-menu">
+                                    <li><a href=""></a>Girls' Clothing</li>
+                                    <li><a href="">Tops and T-Shirts</a></li>
+                                    <li><a href="">Sports Bras</a></li>
+                                    <li><a href="">Hoodies and Sweatshirts</a></li>
+                                    <li><a href="">Pants and Leggings</a></li>
+                                    <li><a href="">Shorts</a></li>
+                                    <li><a href="">All Girls' Clothing</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul style="padding-bottom: 30px;" class="sub-menu">
+                                    <li><a href="">Accessories and Equipment</a></li>
+                                    <li><a href="">All Accesries and Equipment</a></li>
+                                    <li><a href="">Bags and Backpacks</a></li>
+                                    <li><a href="">Socks</a></li>
+                                    <li><a href="">Hats and Headwear</a></li>
+                                </ul>
+                                <ul class="sub-menu">
+                                    <li><a href=""></a>Running</li>
+                                    <li><a href="">Football</a></li>
+                                    <li><a href="">Basketball</a></li>
+                                    <li><a href="">Gym and Training</a></li>
+                                    <li><a href="">Tennis</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="">Sale</a>
+                    <div class="dvsub-menu">
+                        <div class="dsub-menu">
+                            <ul class="sub-menu">
+                                <li><a href="">Featured</a></li>
+                                <li><a href="">Shop All Sale</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">Men's Sale</a></li>
+                                <li><a href="">Shoes</a></li>
+                                <li><a href="">Clothing</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">Women's Sale</a></li>
+                                <li><a href="">Shoes</a></li>
+                                <li><a href="">Clothing</a></li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li><a href="">Kid's Sale</a></li>
+                                <li><a href="">Shoes</a></li>
+                                <li><a href="">Clothing</a></li>
+                            </ul>
 
-                                    <ul class="sub-menu">
-                                        <li><a href="">Shop By Brand</a></li>
-                                        <li><a href="">Nike Sportswear</a></li>
-                                        <li><a href="">NikeLab</a></li>
-                                        <li><a href="">Nike By You</a></li>
-                                        <li><a href="">Jordan</a></li>
-                                        <li><a href="">ACG</a></li>
-                                        <li><a href="">NBA</a></li>
-                                        <li><a href="">Nike SB</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
-                    </li>
-                    <li><a href="">Kid</a>
-                        <div class="dvsub-menu">
-                            <div class="dsub-menu">
-                                <div>
-                                    <ul style="padding-bottom: 30px;" class="sub-menu">
-                                        <li><a href="">Featured</a></li>
-                                        <li><a href="">New Releases</a></li>
-                                        <li><a href="">Newest Sneakers</a></li>
-                                        <li><a href="">Bestsellers</a></li>
-                                        <li><a href="">Member Exclusive</a></li>
-                                        <li><a href="">Jordan</a></li>
-                                        <li><a href="">Bags and Backpacks</a></li>
-                                        <li><a href="">Last Sizes Available</a></li>
-                                        <li><a href="">Sale</a></li>
-                                    </ul>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Kids By Age</a></li>
-                                        <li><a href="">Older Kids( 7 - 14 years)</a></li>
-                                        <li><a href="">Younger Kids (4 - 7 years)</a></li>
-                                        <li><a href="">Babies & Toddlers (0 - 4 years)</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <ul style="padding-bottom: 30px;" class="sub-menu">
-                                        <li><a href="">Boys' Shoes</a></li>
-                                        <li><a href="">All Shoes</a></li>
-                                        <li><a href="">Older Boys (7 - 14 years)</a></li>
-                                        <li><a href="">Younger Boy (4 - 7 years)</a></li>
-                                        <li><a href="">Babies and Toddlers (0 - 4 years)</a></li>
-                                        <li><a href="">Lifestyle</a></li>
-                                        <li><a href="">Jordan</a></li>
-                                        <li><a href="">Running</a></li>
-                                        <li><a href="">Basketball</a></li>
-                                        <li><a href="">Football</a></li>
-                                        <li><a href="">Sandals and Slides</a></li>
-                                    </ul>
-                                    <ul class="sub-menu">
-                                        <li><a href=""></a>Boys' Clothing</li>
-                                        <li><a href="">Tops and T-Shirts</a></li>
-                                        <li><a href="">Hoodies and Sweatshirts</a></li>
-                                        <li><a href="">Shorts</a></li>
-                                        <li><a href="">All Boys' Clothing</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <ul style="padding-bottom: 30px;" class="sub-menu">
-                                        <li><a href="">Girls' Shoes</a></li>
-                                        <li><a href="">All Shoes</a></li>
-                                        <li><a href="">Older Boys (7 - 14 years)</a></li>
-                                        <li><a href="">Younger Boy (4 - 7 years)</a></li>
-                                        <li><a href="">Babies and Toddlers (0 - 4 years)</a></li>
-                                        <li><a href="">Lifestyle</a></li>
-                                        <li><a href="">Jordan</a></li>
-                                        <li><a href="">Running</a></li>
-                                        <li><a href="">Basketball</a></li>
-                                        <li><a href="">Football</a></li>
-                                        <li><a href="">Sandals and Slides</a></li>
-                                    </ul>
-                                    <ul class="sub-menu">
-                                        <li><a href=""></a>Girls' Clothing</li>
-                                        <li><a href="">Tops and T-Shirts</a></li>
-                                        <li><a href="">Sports Bras</a></li>
-                                        <li><a href="">Hoodies and Sweatshirts</a></li>
-                                        <li><a href="">Pants and Leggings</a></li>
-                                        <li><a href="">Shorts</a></li>
-                                        <li><a href="">All Girls' Clothing</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <ul style="padding-bottom: 30px;" class="sub-menu">
-                                        <li><a href="">Accessories and Equipment</a></li>
-                                        <li><a href="">All Accesries and Equipment</a></li>
-                                        <li><a href="">Bags and Backpacks</a></li>
-                                        <li><a href="">Socks</a></li>
-                                        <li><a href="">Hats and Headwear</a></li>
-                                    </ul>
-                                    <ul class="sub-menu">
-                                        <li><a href=""></a>Running</li>
-                                        <li><a href="">Football</a></li>
-                                        <li><a href="">Basketball</a></li>
-                                        <li><a href="">Gym and Training</a></li>
-                                        <li><a href="">Tennis</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="">Sale</a>
-                        <div class="dvsub-menu">
-                            <div class="dsub-menu">
-                                <ul class="sub-menu">
-                                    <li><a href="">Featured</a></li>
-                                    <li><a href="">Shop All Sale</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="">Men's Sale</a></li>
-                                    <li><a href="">Shoes</a></li>
-                                    <li><a href="">Clothing</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="">Women's Sale</a></li>
-                                    <li><a href="">Shoes</a></li>
-                                    <li><a href="">Clothing</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="">Kid's Sale</a></li>
-                                    <li><a href="">Shoes</a></li>
-                                    <li><a href="">Clothing</a></li>
-                                </ul>
+                    </div>
+                </li>
+                <li><a href="">SNKRS</a></li>
+            </ul>
 
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="">SNKRS</a></li>
-                </ul>
-                        
             <div class="header-search">
-                <a style="margin-right: -30px; position: absolute;" href=""><i style="color: black;"
-                        class="bi bi-search"></i></a>
-                <input type="text" placeholder="Search">
-                <a style="margin: 0px 10px;" href=""><i class="bi bi-suit-heart"></i></a>
+                <form action="/products/search" method="post">
+                    <button style="margin-right: -30px; position: absolute; border: unset; background: unset;"
+                        type="submit">
+                        <i style="color: black;font-size: 24px;" class="bi bi-search"></i>
+                    </button>
+                    <input class="header-search-input" type="text" name="search" placeholder="Search">
+                </form>
+                <a class="header-like" href=""><i style="font-size: 24px;padding: 0px 20px; color: black;"
+                        class="bi bi-suit-heart"></i></a>
                 <div class="add-to-bag">
-                    <a  href=""><i class=" bi bi-handbag"></i></a>
-                    <span id="quatity">0</span>
-                </div>                                
+                    <% if (isAuthenticated) { %>
+                        <a href="/cart"><i class=" bi bi-handbag"></i></a>
+                        <span id="quatity">
+                            <%= lengthCart %>
+                        </span>
+                        <% } else { %>
+                            <a href="/cart"><i class=" bi bi-handbag"></i></a>
+                            <% } %>
+
+                </div>
             </div>
             <i id="menu-icon" class="bi bi-list"></i>
         </nav>
@@ -363,4 +386,14 @@
         </div>
     </div>
 </div>
+<script>
+    function hoverAccount() {
+        let account = document.querySelector(".header-login-menu");
+        account.classList.add("header-login-memu-hover");
+        // xóa class khi hêt hover
+        account.addEventListener("mouseout", function () {
+            account.classList.remove("header-login-memu-hover");
+        })
+    }
+</script>
 <script src="../../.././javascripts/header.js"></script>

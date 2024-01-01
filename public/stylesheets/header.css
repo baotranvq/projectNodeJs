@@ -67,32 +67,33 @@
     display: flex;
     margin: auto 0px;
 } 
-.header-search > a {
+.header-search > form > button {
     padding: 5px 10px;
     font-size: 20px;
     color: black;
 } 
-.header-search > a:hover {
+.header-search > form > button:hover {
     background-color: #dfdfdf;
     border-radius: 150px;
 } 
-.header-search input {
+.header-search > form > input {
     border-radius: 50px;
     background-color: #f5f5f5;
     border: none;
     padding-left: 50px;
     width: 180px;
+    height: 25px;
 }
-.header-search > input:hover {
+.header-search > form > input:hover {
     background-color: #dfdfdf;
 }
 
-.header-search > button {
+.header-search > form > button {
     border: none;
     border-radius: 50%;
     padding: 0px 11px;
 }
-.header-search > button:hover {
+.header-search > form > button:hover {
     background-color: #dfdfdf;
 }
 /* Css SL gio hang  */
@@ -150,6 +151,31 @@
     right: 0;
     z-index: 1;
     padding-bottom: 50px;
+}
+
+.header-login-menu{
+    position: absolute;
+    background-color: #fff;
+    width: 220px;
+    top: 35px;
+    right: 0px;
+    z-index: 1;
+    display: none;
+}
+.header-login-memu-hover{
+    display:block;
+}
+.header-login-menu >ul>li{
+    padding-bottom: 10px;
+    list-style: none;
+}
+.header-login-menu >ul>li>a{
+    font-size: 16px;
+    text-decoration: none;
+    color: #aeaeae;
+}
+.header-login-menu >ul>li>a:hover{
+    color: #111111;
 }
 /* .dsub-menu-men {
     display: flex;
@@ -237,15 +263,6 @@
     }
     .header-second > nav > a{
         margin: 0px;
-    }
-   
-    .header-search input{
-        height: 25px;
-        width: 140px;
-    }
-    .header-search > a {
-        padding: 0px 10px;
-        font-size: 15px;
     }
     .add-to-bag a {
         font-size: 16px;
