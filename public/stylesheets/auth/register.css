@@ -19,4 +19,11 @@
     padding-top: 10px;
     color: red;
 }
+.register-form-group.invalid .inp-join {
+    border:1px solid #f33a58;
+}
+
+.register-form-group.invalid .form-message {
+    color: #f33a58;
+}
 

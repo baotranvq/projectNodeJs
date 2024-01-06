@@ -1,0 +1,53 @@
+<h1>Hello Order List</h1>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Customer name</th>
+        <th scope="col">Total price</th>
+        <th scope="col">Payment</th>
+        <th scope="col">Created at</th>
+        <th scope="col">Status</th>
+        <th scope="col">Detail</th>
+      </tr>
+    </thead>
+    <tbody class="order_list_body">
+        <!-- Render API Order List  -->
+    </tbody>
+</table>
+
+<script>
+    const cartApi = '/users/APIadmin';
+    async function start() {
+        let apiOrders = await getOrders(); // lấy API to Array
+        // console.log("apiOrders", apiOrders);
+        renderOrders(apiOrders)
+    }
+    start();
+
+    async function getOrders() {
+        const response = await fetch(cartApi);
+        const order = await response.json();
+        return order
+    }
+
+    function renderOrders(orders) {
+        let listOrder = document.querySelector('.order_list_body');
+        let i = 0;
+        let html = orders.map(function (order) {
+            return `
+                    <tr>
+                        <th scope="row">${++i}</th>
+                        <td>${order.firstname} ${order.lastname}</td>
+                        <td>${order.total_price.toLocaleString('vi-VN')} đ </td>
+                        <td>${order.payment}</td>
+                        <td>${order.careted_at}</td>
+                        <td>${order.order_status == 1 ? "Confirmed." : `Unconfirmed | <button>Comfirm</button>`}</td>
+                        <td><a href="${order.order_id}"><button>Detail</button></a></td>
+                    </tr>
+            `;
+        })
+        listOrder.innerHTML = html.join('');
+    }
+
+</script>

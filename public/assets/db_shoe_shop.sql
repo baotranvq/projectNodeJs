@@ -56,3 +56,29 @@ CREATE TABLE orderguest (
    	orderguest_status int(11),
     FOREIGN KEY (orderguest_product_id) REFERENCES product(product_id)
 )
+
+create table orders (
+	order_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    id_user int(11),
+    total_price decimal(10),
+    payment varchar(255),
+    careted_at date,
+    FOREIGN KEY (id_user) REFERENCES users(id)
+)
+
+CREATE TABLE order_detail (
+	order_detail_id int(11) PRIMARY KEY AUTO_INCREMENT,
+    order_id int(11),
+    product_id int(11),
+    size_id int(11),
+    color_id int(11),
+    order_detail_quantity int(11),
+    payment varchar(255),
+    order_detail_created date,
+    order_detail_phone int(11),
+    order_detail_address varchar(255),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES product(product_id),
+    FOREIGN KEY (size_id) REFERENCES sizes(size_id),
+    FOREIGN KEY (color_id) REFERENCES colors(color_id)
+)

@@ -27,4 +27,57 @@ exports.createGsCheckout = function(data, callback) {
     });
 }
 
+// SQL order cart
+exports.createOrder =async function(data) { 
+    return new Promise(function(resolve, reject) {
+        let sql = `INSERT INTO 	orders	SET ?`;
+        db.query(sql,data, function(err, d) { 
+            if(err) {
+                return reject;
+            }
+            return resolve(d);
+        });
+    })
+    
+}
+
+exports.readOrder =async function(userId) { 
+    return new Promise(function(resolve, reject) {
+        let sql = `SELECT * FROM orders WHERE id_user = ? ORDER BY order_id DESC`;
+        db.query(sql,userId, function(err, d) { 
+            if(err) {
+                return reject;
+            }
+            return resolve(d);
+        });
+    })
+    
+}
+
+exports.createOrderDetail = async function(data) { 
+    return new Promise(function(resolve, reject) {
+        let sql = `INSERT INTO 	order_detail SET ?`;
+        db.query(sql,data, function(err, d) { 
+            if(err) {
+                return reject;
+            }
+            return resolve(d);
+        });
+    })
+    
+}
+
+exports.deleteCart =async function(data) { 
+    return new Promise(function(resolve, reject) {
+        let sql = `DELETE FROM carts WHERE id_cart = ? AND user_id =? `;
+        db.query(sql,[data.id_cart, data.user_id], function(err, d) { 
+            if(err) {
+                return reject;
+            }
+            return resolve(d);
+        });
+    })
+    
+}
+
 

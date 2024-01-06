@@ -1,6 +1,8 @@
 const modelProducts = require('../Models/product')
 const modelCart = require('../Models/cart.model')
 const modelCheckout = require('../Models/checkout.model')
+const modelAdmin = require('../Models/admin.model')
+
 
 class UsersController {
     users = function (req, res) {
@@ -36,6 +38,8 @@ class UsersController {
         })
     };
 
+
+    // CART
     APIcart= function (req, res) {
         let userInformation = req.session.user;
         let userId = userInformation.id;
@@ -88,10 +92,19 @@ class UsersController {
 
     // Checkout GS
     getCheckoutGs =  function(req, res){
-        let product_id = req.params.id;
         modelCheckout.getGsCheckout(product_id,function(err,data){
             if(err){
                 console.log("Lỗi truy vấn Delete Carts SQL",err);
+            }
+            return res.json(data)
+        })
+    }
+
+    //ADMIN
+    readOrder =  function(req, res){
+        modelAdmin.read(function(err,data){
+            if(err){
+                console.log("Lỗi truy vấn  SQL",err);
             }
             return res.json(data)
         })

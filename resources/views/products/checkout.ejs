@@ -1,0 +1,67 @@
+<div class="main-content">
+
+
+
+    <div>
+        <div class="main-cartview">
+            <div style="flex-basis: 50%;">
+                <div class="cart-left">
+                    <form id="form1" action="/checkout/create-checkout" method="POST" class="form">
+                        <h3 class="heading">Enter your information</h3>
+                        <div class="spacer"></div>
+
+                        <div class="form-group register-form-group">
+                            <label for="fullname" class="form-label">Name</label>
+                            <input id="fullname" name="customer_name" type="text" value="<%= user.firstname%> <%= user.lastname%>"
+                                class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+
+                        <div class="form-group register-form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input id="email" name="customer_email" type="text" value="<%= user.email %>"
+                                class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+
+                        <div class="form-group register-form-group">
+                            <label for="phone" class="form-label">Phone number</label>
+                            <input id="phone" name="phone" type="phone" placeholder="VD: 0908234567"
+                                class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+
+                        <div class="form-group register-form-group">
+                            <label for="address" class="form-label">Address</label>
+                            <input id="address" name="address" placeholder="Enter Address" type="text"
+                                class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+                        <input type="hidden" class="price" id="price" name="orderguest_total_price">
+                        <div class="productAddToBag">
+                            <button style="margin-bottom: unset;" type="submit">Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+
+        </div>
+
+    </div>
+    <script src="../../.././javascripts/validator.js"></script>
+
+    <script>
+
+        Validator({
+        form: "#form1",
+        rules: [
+            Validator.isRequired('#fullname'),
+            Validator.isRequired('#phone'),
+            Validator.isRequired('#address'),
+            Validator.isEmail('#email')
+        ]
+    })
+
+        
+    </script>

@@ -3,6 +3,8 @@ var router = express.Router();
 const usersController = require('../src/app/Controllers/UsersController');
 
 /* GET users listing. */
+router.use('/APIadmin', usersController.readOrder)
+
 router.use('/APIcheckout/:id', usersController.getCheckoutGs)
 
 router.put('/APIcarts', usersController.updateCart)

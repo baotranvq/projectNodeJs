@@ -8,9 +8,13 @@ const productRouter = require('./products');
 const authRouter = require('./authRoute');
 const cartRouter = require('./cartRoute');
 const checkoutRouter = require('./checkoutRoute');
+const adminRouter = require('./adminRoute');
+
 
 
 /* GET home page. */
+router.use('/admin',adminRouter)
+
 router.use('/checkout',checkoutRouter)
 
 router.use('/cart',cartRouter)

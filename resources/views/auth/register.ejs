@@ -9,22 +9,22 @@
                     <%= error %>
                 </div>
             <% } %>
-            <form action="/auth/postRegister" method="POST">
-                <div class="register-form-group">
+            <form id="form1" action="/auth/postRegister" method="POST">
+                <div class="register-form-group ">
                     <input class="inp-join" name="email" id="email" type="text" placeholder="Email address">
                     <p class="form-message"></p>
                 </div>
                 <div>
                     <p id="err-join-email" style="margin-bottom: 0px; text-align: left; font-size: 13px; color: red;"></p>
                 </div>
-                <div class="register-form-group">
+                <div class="register-form-group ">
                     <input class="inp-join" name="password" id="password" type="password" placeholder="Password">
                     <p class="form-message"></p>
                 </div>
                 <div>
                     <p id="err-join-password" style="margin-bottom: 0px; text-align: left; font-size: 13px; color: red;"></p>
                 </div>
-                <div class="register-form-group">
+                <div class="register-form-group ">
                     <input class="inp-join" name="firstname" id="firstname" type="text" placeholder="First Name">
                     <p class="form-message"></p>
                 </div>
@@ -46,30 +46,15 @@
                     <p id="err-join-birthday" style="margin-bottom: 0px; text-align: left; font-size: 13px; color: red;"></p>
                 </div>
                 <p style="font-size: 13px;">Get a Nike Member Reward every year on your Birthday.</p>
-                <!-- <div>
-                    <select id="country" name="country" class="form-control">
-                        <option value="vietnam">Vietnam</option>
-                        <option value="indonesia">Indonesia</option>
-                        <option value="thailand">Thailand</option>
-                    </select>
-                </div> -->
                 <div class="sl-gender">
-                    <input id="choose-male" name="gender" class="gender-m inp-join" style="margin-right: 20px;" type="radio" value="Male">
+                    <input id="choose-male" name="gender" class="gender-m inp-join" style="margin-right: 20px;" type="radio" value="Male" checked>
                     <label for="html">Male</label>
                     <input id="choose-female" name="gender" class="gender-m inp-join" type="radio" value="Female">
                     <label for="html">Female</label>
+                    <p class="form-message"></p>
                 </div>
                 <div>
                     <p id="err-join-gender" style="margin-bottom: 0px; text-align: left; font-size: 13px; color: red;"></p>
-                </div>
-                <div style="padding: 5px 0px;">
-                    <div class="how-pass">
-                        <!-- <label class="container">
-                            <input type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                            <span style="font-size: 13px;">Sign up for emails to get updates form Nike on <br> products, offers and your Member benefits</span>
-                        </label> -->
-                    </div>
                 </div>
                 <button id="join-us" style="margin: 5px 0px;" class="sign-in" type="submit">JOIN US</button>
             </form>
@@ -79,4 +64,18 @@
     </div>
 
 </div>
+<script src="../../.././javascripts/validator.js"></script>
+<script>
+    Validator({
+        form: "#form1",
+        rules: [
+            Validator.isRequired('#firstname'),
+            Validator.minLength('#password',8),
+            Validator.isRequired('#lastname'),
+            Validator.isRequired('#birthday'),
+            Validator.isEmail('#email')
+        ]
+    })
+    
+</script>
 <!-- END REGISTER  -->

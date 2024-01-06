@@ -3,13 +3,6 @@ modelCart = require('../Models/cart.model');
 class CartController {
 
     cart = function (req, res, next) {
-
-        // res.locals.isAuthenticated = req.session && req.session.cart;
-        // if (res.locals.isAuthenticated) {
-        //     res.locals.cart = req.session.cart;
-        // }
-        // next();
-
         res.render('products/cart');
     };
 

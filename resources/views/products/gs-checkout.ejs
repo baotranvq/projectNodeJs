@@ -6,41 +6,41 @@
         <div class="main-cartview">
             <div style="flex-basis: 50%;">
                 <div class="cart-left">
-                    <form action="/checkout/create-buy-now" method="POST" class="form" id="form-1">
+                    <form id="form1" action="/checkout/create-buy-now" method="POST" class="form">
                         <h3 class="heading">Enter your information</h3>
                         <div class="spacer"></div>
 
-                        <div class="form-group">
+                        <div class="form-group register-form-group">
                             <label for="fullname" class="form-label">Name</label>
                             <input id="fullname" name="customer_name" type="text" placeholder="VD: Nguyen Van A"
                                 class="form-control">
                             <span class="form-message"></span>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group register-form-group">
                             <label for="email" class="form-label">Email</label>
                             <input id="email" name="customer_email" type="text" placeholder="VD: email@domain.com"
                                 class="form-control">
                             <span class="form-message"></span>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group register-form-group">
                             <label for="phone" class="form-label">Phone number</label>
                             <input id="phone" name="customer_phone" type="phone" placeholder="VD: 0908234567"
                                 class="form-control">
                             <span class="form-message"></span>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group register-form-group">
                             <label for="address" class="form-label">Address</label>
                             <input id="address" name="customer_address" placeholder="Enter Address" type="text"
                                 class="form-control">
                             <span class="form-message"></span>
                         </div>
                         <input type="hidden" id="id-product" name="orderguest_product_id" value="<%= variable %>">
-                        <input type="hidden" class="price" id="price" name="orderguest_total_price" >
+                        <input type="hidden" class="price" id="price" name="orderguest_total_price">
                         <div class="productAddToBag">
-                            <button  style="margin-bottom: unset;" type="submit">Order</button>
+                            <button style="margin-bottom: unset;" type="submit">Order</button>
                         </div>
                     </form>
                 </div>
@@ -76,8 +76,10 @@
         </div>
 
     </div>
+    <script src="../../.././javascripts/validator.js"></script>
+
     <script>
-        const checkoutApi = 'http://localhost:3000/users/APIcheckout';
+        const checkoutApi = '/users/APIcheckout';
 
         async function start() {
             let arrCheckoutProduct = await getOrder()
@@ -104,7 +106,7 @@
             subtotal.innerHTML = (product[0].promotion_price > 0) ? (product[0].promotion_price).toLocaleString('vi-VN') + " đ" : (product[0].price).toLocaleString('vi-VN') + " đ";
             let total = document.querySelector(".checkout-total");
             total.innerHTML = (product[0].promotion_price > 0) ? (product[0].promotion_price + 250000).toLocaleString('vi-VN') + " đ" : (product[0].price + 250000).toLocaleString('vi-VN') + " đ";
-            let price =  document.querySelector(".price");
+            let price = document.querySelector(".price");
             price.value = (product[0].promotion_price > 0) ? product[0].promotion_price + 250000 : product[0].price + 250000;
             let checkoutProduct = document.getElementById("checkout-product")
             let html = product.map(function (item) {
@@ -137,12 +139,22 @@
             checkoutProduct.innerHTML = html.join('');
         }
 
+        Validator({
+        form: "#form1",
+        rules: [
+            Validator.isRequired('#fullname'),
+            Validator.isRequired('#phone'),
+            Validator.isRequired('#address'),
+            Validator.isEmail('#email')
+        ]
+    })
+
         // async function handleCreateOrder() {
         //     let name = document.getElementById("name").value;
         //     let email = document.getElementById("email").value;
         //     let phone = document.getElementById("phone").value;
         //     let address = document.getElementById("address").value;
-        //     let id = document.getElementById("id-product").value; 
+        //     let id = document.getElementById("id-product").value;
         //     let price = document.getElementById("price").value;
         //     const currentDate = new Date();
         //     const year = currentDate.getFullYear();

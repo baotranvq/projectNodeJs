@@ -57,10 +57,17 @@
                     <p class="bag-total">Total</p>
                     <p class="cart-total" id="bag-total"></p>
                 </div>
-                <div class="content-click">
-                    <a href="/login.html?">
-                        <div class="btn-GuestCheckout" type="button">Checkout</div>
-                    </a>
+                <div style="padding-top: 30px;">
+                    <form action="/checkout/cart" method="post">
+                        <div class="productAddToBag">
+                            <div class="cart-id-cart">
+                                <!-- // render id cart  -->
+                                <input id="totalPrice" type="hidden" name="totalPrice"  value="">
+                            </div>
+                            <button type="submit">Checkout</button>
+                        </div>
+                    </form>
+                    
                     <!-- <input class="content-clickbt" type="button" value="Guest Checkout">
                     <br>
                     <input class="content-clickbt" type="button" value="Menber Checkout"> -->
@@ -77,7 +84,9 @@
     async function start() {
         let apiCarts = await getCarts(); // lấy API to Array
         renderCarts(apiCarts) // render view cart
+        // handleSubmitForm(apiCarts)
         renderCartSummary(apiCarts) // render view Summary
+
     }
     start();
 
@@ -129,6 +138,17 @@
         })
         listCarts.innerHTML = html.join('');
     }
+
+    // function handleSubmitForm(carts){
+    //     let idCart = document.querySelector('.cart-id-cart');
+    //     let html = carts.map(function (cart) {
+    //         return `
+    //                 <input type="hidden" name="idCart${cart.id_cart}" value="${cart.id_cart}">
+    //                 <input type="hidden" name="priceCart${cart.id_cart}" value="${cart.promotion_price ? cart.promotion_price : cart.price}">
+    //         `
+    //     })
+    //     idCart.innerHTML = html.join('');
+    // }
 
     function renderCartSummary(carts) {
         let cartSummary = document.querySelector('.detail-subtotal');

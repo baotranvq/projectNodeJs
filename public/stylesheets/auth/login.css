@@ -65,3 +65,6 @@
 .join-us:hover {
     color: black;
 }
+.register-form-group.invalid .inp-login {
+    border:1px solid #f33a58;
+}

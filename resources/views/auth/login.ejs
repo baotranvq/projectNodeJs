@@ -9,14 +9,16 @@
                     <%= error %>
                 </div>
             <% } %>
-            <form action="/auth/postLogin" method="POST">
+            <form id="form1" action="/auth/postLogin" method="POST">
                 <p id="join-incorrectly" style="margin-bottom: 0px; text-align: left; font-size: 13px; color: red;"></p>
-                <div>
-                    <input class="inp-login" name="email" id="login-email" type="text" placeholder="Email address">
+                <div class="register-form-group ">
+                    <input class="inp-login" name="email" id="email" type="text" placeholder="Email address">
+                    <p class="form-message"></p>
                 </div>
                 <p id="err-email" style="text-align: left; font-size: 13px; color: red;"></p>
-                <div>
-                    <input class="inp-login" name="password" id="login-password" type="password" placeholder="Password">
+                <div class="register-form-group ">
+                    <input class="inp-login" name="password" id="password" type="password" placeholder="Password">
+                    <p class="form-message"></p>
                 </div>
                 <p id="err-password" style="text-align: left; font-size: 13px; color: red;"></p>
 
@@ -41,4 +43,16 @@
     </div>
    
 </div>
+<script src="../../.././javascripts/validator.js"></script>
+
+<script>
+    Validator({
+        form: "#form1",
+        rules: [
+            Validator.minLength('#password',8),
+            Validator.isEmail('#email')
+        ]
+    })
+
+</script>
 <!-- END LOGIN  -->
