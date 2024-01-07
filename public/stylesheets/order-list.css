@@ -1,0 +1,20 @@
+.order-list-btn{
+    padding: 2px 5px;
+    background-color: #ea8016;
+    color: #fff;
+    font-weight: 600;
+    border: 1px solid #716e6e;
+}
+.order-list-title th{
+    padding: 10px;
+}
+.order-list-main th{
+    padding-top: 10px;
+    padding-left: 20px;
+}
+.order-list-main td{
+    padding-top: 10px;
+}
+.table{
+    border: 1px;
+}

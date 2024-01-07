@@ -9,10 +9,15 @@ const authRouter = require('./authRoute');
 const cartRouter = require('./cartRoute');
 const checkoutRouter = require('./checkoutRoute');
 const adminRouter = require('./adminRoute');
+const emailRouter = require('./emailRoute');
+
 
 
 
 /* GET home page. */
+router.use('/email',emailRouter)
+
+
 router.use('/admin',adminRouter)
 
 router.use('/checkout',checkoutRouter)

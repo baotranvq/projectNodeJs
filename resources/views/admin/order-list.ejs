@@ -1,20 +1,22 @@
-<h1>Hello Order List</h1>
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">STT</th>
-        <th scope="col">Customer name</th>
-        <th scope="col">Total price</th>
-        <th scope="col">Payment</th>
-        <th scope="col">Created at</th>
-        <th scope="col">Status</th>
-        <th scope="col">Detail</th>
-      </tr>
-    </thead>
-    <tbody class="order_list_body">
-        <!-- Render API Order List  -->
-    </tbody>
-</table>
+<div style="margin: 40px;">
+    <table class="table table-striped">
+        <thead>
+          <tr class="order-list-title">
+            <th scope="col">STT</th>
+            <th scope="col">Customer name</th>
+            <th scope="col">Total price</th>
+            <th scope="col">Payment</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Status</th>
+            <th scope="col">Detail</th>
+          </tr>
+        </thead>
+        <tbody class="order_list_body">
+            <!-- Render API Order List  -->
+        </tbody>
+    </table>
+</div>
+
 
 <script>
     const cartApi = '/users/APIadmin';
@@ -36,18 +38,20 @@
         let i = 0;
         let html = orders.map(function (order) {
             return `
-                    <tr>
+                    <tr class="order-list-main">
                         <th scope="row">${++i}</th>
                         <td>${order.firstname} ${order.lastname}</td>
                         <td>${order.total_price.toLocaleString('vi-VN')} đ </td>
                         <td>${order.payment}</td>
                         <td>${order.careted_at}</td>
-                        <td>${order.order_status == 1 ? "Confirmed." : `Unconfirmed | <button>Comfirm</button>`}</td>
-                        <td><a href="${order.order_id}"><button>Detail</button></a></td>
+                        <td class="order-detail-status-${order.order_id}">${order.order_status == 1 ? "Confirmed." : `Unconfirmed | <a href="./email/sendEmail/${order.order_id}"><button class="order-list-btn">Confirm</button></a>`}</td>
+                        <td><a href="/admin/order-detail/${order.order_id}"><button class="order-list-btn">Detail</button></a></td>
                     </tr>
             `;
         })
         listOrder.innerHTML = html.join('');
     }
+
+  
 
 </script>

@@ -1,0 +1,70 @@
+<div style="margin: 40px;">
+    <table class="table table-striped">
+        <thead>
+            <tr class="order-list-title">
+                <th scope="col">STT</th>
+                <th scope="col">Customer name</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Address</th>
+                <th scope="col">Product</th>
+                <th scope="col">Size</th>
+                <th scope="col">Color</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody class="order_list_body">
+            <!-- Render API Order List  -->
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    function getUrl() {
+        let url = window.location.href
+        let arrUrl = url.split('/')
+        let stringUrl = arrUrl[arrUrl.length - 1]
+        return stringUrl;
+    }
+    let id_order = getUrl();
+    const cartApi = '/users/APIadminOrderDetail/' + id_order;
+
+    async function start() {
+        let apiOrdersDetail = await getOrdersDetail(); // lấy API to Array
+        renderOrdersDetail(apiOrdersDetail)
+    }
+    start();
+
+    async function getOrdersDetail() {
+        const response = await fetch(cartApi);
+        const order = await response.json();
+        return order
+    }
+
+    function renderOrdersDetail(orders) {
+        let listOrder = document.querySelector('.order_list_body');
+        let i = 0;
+        let html = orders.map(function (order) {
+            return `
+                    <tr class="order-list-main">
+                        <th scope="col">${++i}</th>
+                        <th scope="col">${order.firstname} ${order.lastname}</th>
+                        <th scope="col">${order.order_detail_phone}</th>
+                        <th scope="col">${order.order_detail_address}</th>
+                        <th scope="col">${order.product_name}</th>
+                        <th scope="col">${order.size_name}</th>
+                        <th scope="col">${order.color_name}</th>
+                        <th scope="col">${order.order_detail_quantity}</th>
+                        <th scope="col">${(order.price * order.order_detail_quantity).toLocaleString('vi-VN')} đ</th>
+                        <th scope="col">${order.order_detail_created}</th>
+                    </tr>
+            `;
+        })
+        listOrder.innerHTML = html.join('');
+    }
+
+
+
+</script>

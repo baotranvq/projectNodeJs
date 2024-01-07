@@ -92,6 +92,7 @@ class UsersController {
 
     // Checkout GS
     getCheckoutGs =  function(req, res){
+        let product_id = req.params.id
         modelCheckout.getGsCheckout(product_id,function(err,data){
             if(err){
                 console.log("Lỗi truy vấn Delete Carts SQL",err);
@@ -103,6 +104,16 @@ class UsersController {
     //ADMIN
     readOrder =  function(req, res){
         modelAdmin.read(function(err,data){
+            if(err){
+                console.log("Lỗi truy vấn  SQL",err);
+            }
+            return res.json(data)
+        })
+    }
+
+    readOrderDetail =  function(req, res){
+        let order_id = req.params.id;
+        modelAdmin.readOrderDetail(order_id,function(err,data){
             if(err){
                 console.log("Lỗi truy vấn  SQL",err);
             }
