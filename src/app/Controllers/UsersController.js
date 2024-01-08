@@ -1,7 +1,8 @@
 const modelProducts = require('../Models/product')
 const modelCart = require('../Models/cart.model')
 const modelCheckout = require('../Models/checkout.model')
-const modelAdmin = require('../Models/admin.model')
+const modelAdmin = require('../Models/admin.model');
+const { json } = require('body-parser');
 
 
 class UsersController {
@@ -90,7 +91,7 @@ class UsersController {
         })
     }
 
-    // Checkout GS
+    //Checkout GS
     getCheckoutGs =  function(req, res){
         let product_id = req.params.id
         modelCheckout.getGsCheckout(product_id,function(err,data){
@@ -100,6 +101,7 @@ class UsersController {
             return res.json(data)
         })
     }
+
 
     //ADMIN
     readOrder =  function(req, res){

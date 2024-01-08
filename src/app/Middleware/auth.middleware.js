@@ -24,6 +24,7 @@ class checkLogin {
         res.locals.isAuthenticated = req.session && req.session.user;
         if (res.locals.isAuthenticated) {
             res.locals.username = req.session.user.firstname;
+            res.locals.email =  req.session.user.email;
             res.locals.lengthCart = req.session.cart;
         }
         next();
@@ -33,7 +34,6 @@ class checkLogin {
     checkAdmin = (req, res, next) => {
         if(req.session.loggedIn){
             res.locals.email =  req.session.user.email;
-            console.log("admin", res.locals.email)
             if(res.locals.email == "admin@gmail.com"){
                 next();
             }

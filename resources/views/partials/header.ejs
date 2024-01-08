@@ -7,6 +7,7 @@
             <li><a href="">Help</a></li>
             <% if (isAuthenticated) { %>
                 <li ><a id="header-first-user">Hi,<%= username%> </a></li>
+                <input id="check-admin" type="hidden" value="<%= email %>">
                 <div>
                     <i style="cursor:pointer;" onmousemove="hoverAccount()" class="bi bi-person">
                         <div class="header-login-menu">
@@ -14,6 +15,7 @@
                                 <li style="padding: 20px 0px; "><a style="color: black ;font-size: 18px;" href="">Account</a>
                                 </li>
                                 <li><a href="">Profile</a></li>
+                                <li><a id="order-list-admin" href="/admin"></a></li>
                                 <li><a href="">Account Settings</a></li>
                                 <li><a href="/auth/logout">Log Out</a></li>
                             </ul>
@@ -395,5 +397,14 @@
             account.classList.remove("header-login-memu-hover");
         })
     }
+
+    function checkEmail(){
+        let email =document.getElementById("check-admin").value;
+        if(email == "admin@gmail.com"){
+            document.getElementById("order-list-admin").innerHTML = "Order List"
+        }
+    }
+    checkEmail()
+    
 </script>
 <script src="../../.././javascripts/header.js"></script>

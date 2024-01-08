@@ -20,6 +20,7 @@ exports.getGsCheckout = function(id_product, callback) {
     });
 }
 
+
 exports.createGsCheckout = function(data, callback) { 
     let sql = `INSERT INTO 	orderguest	SET ?`;
     db.query(sql,data, function(err, d) { 

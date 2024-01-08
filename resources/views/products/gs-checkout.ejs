@@ -79,10 +79,11 @@
     <script src="../../.././javascripts/validator.js"></script>
 
     <script>
-        const checkoutApi = '/users/APIcheckout/';
+        const checkoutApi = '/users/APIcheckout';
         
         async function start() {
             let arrCheckoutProduct = await getOrder()
+            console.log("Checkout product", arrCheckoutProduct)
             renderCheckout(arrCheckoutProduct)
         }
         start();
@@ -98,6 +99,7 @@
             }
             let res = await fetch(checkoutApi + '/' + idProduct, options);
             let orderProduct = await res.json();
+            console.log("OrderId", orderProduct)
             return orderProduct;
         }
 
