@@ -3,9 +3,6 @@ modelCart = require('../Models/cart.model');
 
 class CheckoutController {
 
-    // GsCheckout = function (req, res) {
-    //     res.render('products/gs-checkout');
-    // };
 
     postCheckout = async function (req, res) {
         let productCode = req.body.productCode;
